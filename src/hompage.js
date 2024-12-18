@@ -5,10 +5,16 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
+
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Slide from "@mui/material/Slide";
 import Grid from "@mui/material/Grid";
+
 function HideOnScroll(props) {
   const { children, window } = props;
   const trigger = useScrollTrigger({
@@ -35,6 +41,55 @@ export default function HideAppBar(props) {
   const texts = ["30 DAY GUARANTEE!", "40% OFF TODAY ONLY!", "Free Shipping!"];
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [isSliding, setIsSliding] = React.useState(false);
+
+  const card = (
+    <React.Fragment>
+      <CardContent>
+        <Typography
+          gutterBottom
+          sx={{ color: "text.secondary", fontSize: 24, display: "inline" }}
+        >
+          CHloakCalc
+          <Typography
+            component="span"
+            sx={{
+              fontSize: "12px", // Smaller font size for TM
+              verticalAlign: "super", // Position TM above
+              lineHeight: "0", // Align closely above the text
+              marginLeft: "2px", // Optional spacing between main text and TM
+            }}
+          >
+            TM
+          </Typography>
+        </Typography>
+
+        <Typography
+          sx={{
+            mt: "10px",
+            fontSize: "20px", // Smaller font size for TM
+          }}
+        >
+          Work smarter NOT harder!
+        </Typography>
+      </CardContent>
+      <CardActions><Button 
+  size="small" 
+  sx={{
+    backgroundColor: "black", // Black background
+    color: "#e0e0e0",          // White text
+    paddingX: 4,              // Horizontal padding (left and right)
+    paddingY: 1.5,            // Vertical padding (top and bottom)
+    '&:hover': {
+      backgroundColor: "gray", // Optional: Change background color on hover
+    },
+  }}
+>
+  Buy Now!
+</Button>
+
+      </CardActions>
+    </React.Fragment>
+  );
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSlide = React.useCallback((direction) => {
@@ -161,7 +216,8 @@ export default function HideAppBar(props) {
             backgroundColor: "white", // Set Toolbar background to white
           }}
         />
-        <Grid container justifyContent="flex-end">
+
+        <Grid container justifyContent="center">
           <Grid item xs={12} md={6}>
             {" "}
             {/* Full width on small screens, half on medium+ */}
@@ -169,49 +225,58 @@ export default function HideAppBar(props) {
               <Box sx={{ my: 1, mt: 14 }}>
                 <div
                   style={{
-                    overflow: "hidden",
-                    borderRadius: "15px",
-                    height: "500px",
+                    position: "relative",
+                    width: "100%",
+                    height: "100%",
                   }}
                 >
                   <img
                     src="/assets/background/calc.png"
                     alt="Work in progress"
                     style={{
-                      width: "100%", // Adjust to fill the container
-                      height: "100%", // Adjust to fill the container
+                      width: "100%",
+                      height: "100%",
                       objectFit: "cover",
+                      borderRadius: "15px",
                     }}
                   />
+                  <Box
+                    sx={{
+                      position: "absolute", // Inside the image
+                      bottom: { xs: -180, md: "auto" }, // Bottom position for mobile
+                      left: { xs: "50%", md: -230 }, // Centered horizontally on mobile, left on large
+                      top: { md: 260 }, // Positioned at the top on large screens
+                      transform: { xs: "translateX(-50%)", md: "none" }, // Centered horizontally on mobile
+                      width: { xs: "110%", md: "43%" }, // Adjust width based on screen size
+                      border: "transparent", // Border width and style
+
+                      borderColor: "transparent", // Set the border color to transparent, // Set the border color to white
+                      padding: 5,
+                    }}
+                  >
+                    <Card variant="outlined">{card}</Card>
+                  </Box>
                 </div>
-                Work in progress 
-                Work in progress 
-                Work in progress 
-                Work in progress
-                Work in progress 
-                Work in progress 
-                Work in progress 
-                Work in progress 
-                Work in progress
               </Box>
             </Container>
           </Grid>
         </Grid>
-        {/* Footer */}
-        <footer
-          style={{
-            backgroundColor: "white", // Set the footer background to white
-            color: "black", // Set text color for contrast
-            textAlign: "center",
-            padding: "10px 0",
-            borderTop: "1px solid #ddd", // Optional: Add a light border for separation
-          }}
-        >
-          <Typography variant="body2">
-            © 2019 Simple React Page. All Rights Reserved.
-          </Typography>
-        </footer>
       </div>
+
+      {/* Footer */}
+      <footer
+        style={{
+          backgroundColor: "white", // Set the footer background to white
+          color: "black", // Set text color for contrast
+          textAlign: "center",
+          padding: "10px 0",
+          borderTop: "1px solid #ddd", // Optional: Add a light border for separation
+        }}
+      >
+        <Typography variant="body2">
+          © 2019 Simple React Page. All Rights Reserved.
+        </Typography>
+      </footer>
     </React.Fragment>
   );
 }

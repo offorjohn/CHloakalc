@@ -32,6 +32,19 @@ HideOnScroll.propTypes = {
 };
 
 export default function HideAppBar(props) {
+  const texts = ["30 DAY GUARANTEE!", "40% OFF TODAY ONLY!", "Free Shipping!",];
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
+  };
+
+  const handlePrev = () => {
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + texts.length) % texts.length
+    );
+  };
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -49,26 +62,62 @@ export default function HideAppBar(props) {
               backgroundColor: "white", // Set the AppBar background to white
               color: "black", // Set the text color to black for contrast
               boxShadow: "none", // Remove the shadow for a cleaner look
-              borderBottom: "1px solid #ddd", // Optional: Add a light border for separation
             }}
           >
+            {" "}
+            <Typography
+              variant="h6"
+              style={{
+                backgroundColor: "black",
+
+                color: "#e0e0e0", // Slightly dimmer white color
+                padding: "8px 16px",
+                borderRadius: "4px",
+                display: "flex",
+                justifyContent: "center", // Center items horizontally inside Typography
+                alignItems: "center", // Center items vertically inside Typography
+                gap: "56px", // Add space between elements
+              }}
+            >
+              <span
+                style={{
+                  cursor: "pointer",
+                  color: "#e0e0e0",
+                  fontSize: "19px", // Larger font size for better visibility
+                }}
+                onClick={handlePrev}
+              >
+                {"<"} {/* Previous arrow */}
+              </span>
+              {texts[currentIndex]}
+              <span
+                style={{
+                  cursor: "pointer",
+                  color: "#e0e0e0",
+                  fontSize: "19px", // Larger font size for better visibility
+                }}
+                onClick={handleNext}
+              >
+                {">"} {/* Next arrow */}
+              </span>
+            </Typography>
             <Toolbar
-      style={{
-        display: "flex", // Enable flexbox
-        justifyContent: "center", // Center items horizontally
-        alignItems: "center", // Center items vertically
-      }}
-    ><img
-    src="/assets/background/wwe.png" // Replace with the actual path to your image
-    alt="Logo"
-    style={{
-      width: '250px',  // Increased width to stretch more
-      height: "150px", // Increased height to stretch more
-      objectFit: "cover", // Stretches the image to cover the area without maintaining aspect ratio
-    }}
-  />
-  
-    </Toolbar>
+              style={{
+                display: "flex", // Enable flexbox
+                justifyContent: "center", // Center items horizontally
+                alignItems: "center", // Center items vertically
+              }}
+            >
+              <img
+                src="/assets/background/wwe.png" // Replace with the actual path to your image
+                alt="Logo"
+                style={{
+                  width: "250px", // Increased width to stretch more
+                  height: "100px", // Increased height to stretch more
+                  objectFit: "cover", // Stretches the image to cover the area without maintaining aspect ratio
+                }}
+              />
+            </Toolbar>
           </AppBar>
         </HideOnScroll>
         <Toolbar
@@ -83,7 +132,7 @@ export default function HideAppBar(props) {
                 () => `Work in progress Work in progress Work in progress Work in progress Work in progress Work in progress Work in progress Work in progress
                   Work in progress Work in progress Work in progress Work in progress  Work in progress Work in progress Work in progress Work in progress Work in progress Work in progress
                   Work in progress Work in progress Work in progress Work in progress Work in progress Work in progress
-                `,
+                `
               )
               .join("\n")}
           </Box>
@@ -99,7 +148,7 @@ export default function HideAppBar(props) {
           }}
         >
           <Typography variant="body2">
-            © 2024 Simple React Page. All Rights Reserved.
+            © 2019 Simple React Page. All Rights Reserved.
           </Typography>
         </footer>
       </div>

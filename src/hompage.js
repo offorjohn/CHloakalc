@@ -8,7 +8,7 @@ import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Slide from "@mui/material/Slide";
-
+import Grid from "@mui/material/Grid";
 function HideOnScroll(props) {
   const { children, window } = props;
   const trigger = useScrollTrigger({
@@ -32,18 +32,35 @@ HideOnScroll.propTypes = {
 };
 
 export default function HideAppBar(props) {
-  const texts = ["30 DAY GUARANTEE!", "40% OFF TODAY ONLY!", "Free Shipping!",];
+  const texts = ["30 DAY GUARANTEE!", "40% OFF TODAY ONLY!", "Free Shipping!"];
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [isSliding, setIsSliding] = React.useState(false);
 
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const handleSlide = React.useCallback((direction) => {
+    if (isSliding) return; // Prevent overlapping slides
+    setIsSliding(true);
 
-  const handlePrev = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + texts.length) % texts.length
-    );
-  };
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) => {
+        if (direction === "next") {
+          return (prevIndex + 1) % texts.length;
+        } else {
+          return (prevIndex - 1 + texts.length) % texts.length;
+        }
+      });
+      setIsSliding(false);
+    }, 500); // Slide duration
+  });
+
+  React.useEffect(() => {
+    const intervalId = setInterval(() => {
+      handleSlide("next"); // Automatically go to the next slide every 3 seconds
+    }, 3000); // 3 seconds interval
+
+    // Clean up the interval when the component is unmounted
+    return () => clearInterval(intervalId);
+  }, [handleSlide, isSliding]);
 
   return (
     <React.Fragment>
@@ -85,18 +102,35 @@ export default function HideAppBar(props) {
                   color: "#e0e0e0",
                   fontSize: "19px", // Larger font size for better visibility
                 }}
-                onClick={handlePrev}
+                onClick={() => handleSlide("prev")}
               >
                 {"<"} {/* Previous arrow */}
               </span>
-              {texts[currentIndex]}
+              <div
+                style={{
+                  width: "200px", // Set width for the text container
+                  textAlign: "center",
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  position: "relative",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontSize: "18px",
+                  transition: "transform 0.5s ease, opacity 0.5s ease",
+                  transform: isSliding ? "translateX(-50px)" : "translateX(0)",
+                  opacity: isSliding ? 0 : 1,
+                }}
+              >
+                {texts[currentIndex]}
+              </div>
               <span
                 style={{
                   cursor: "pointer",
                   color: "#e0e0e0",
                   fontSize: "19px", // Larger font size for better visibility
                 }}
-                onClick={handleNext}
+                onClick={() => handleSlide("next")}
               >
                 {">"} {/* Next arrow */}
               </span>
@@ -115,6 +149,8 @@ export default function HideAppBar(props) {
                   width: "250px", // Increased width to stretch more
                   height: "100px", // Increased height to stretch more
                   objectFit: "cover", // Stretches the image to cover the area without maintaining aspect ratio
+                  borderRadius: "15px",
+                  marginTop: "10px", // Move the image down by 20p
                 }}
               />
             </Toolbar>
@@ -125,18 +161,42 @@ export default function HideAppBar(props) {
             backgroundColor: "white", // Set Toolbar background to white
           }}
         />
-        <Container style={{ flex: "1" }}>
-          <Box sx={{ my: 2 }}>
-            {[...new Array(12)]
-              .map(
-                () => `Work in progress Work in progress Work in progress Work in progress Work in progress Work in progress Work in progress Work in progress
-                  Work in progress Work in progress Work in progress Work in progress  Work in progress Work in progress Work in progress Work in progress Work in progress Work in progress
-                  Work in progress Work in progress Work in progress Work in progress Work in progress Work in progress
-                `
-              )
-              .join("\n")}
-          </Box>
-        </Container>
+        <Grid container justifyContent="flex-end">
+          <Grid item xs={12} md={6}>
+            {" "}
+            {/* Full width on small screens, half on medium+ */}
+            <Container style={{ flex: "1" }}>
+              <Box sx={{ my: 1, mt: 14 }}>
+                <div
+                  style={{
+                    overflow: "hidden",
+                    borderRadius: "15px",
+                    height: "500px",
+                  }}
+                >
+                  <img
+                    src="/assets/background/calc.png"
+                    alt="Work in progress"
+                    style={{
+                      width: "100%", // Adjust to fill the container
+                      height: "100%", // Adjust to fill the container
+                      objectFit: "cover",
+                    }}
+                  />
+                </div>
+                Work in progress 
+                Work in progress 
+                Work in progress 
+                Work in progress
+                Work in progress 
+                Work in progress 
+                Work in progress 
+                Work in progress 
+                Work in progress
+              </Box>
+            </Container>
+          </Grid>
+        </Grid>
         {/* Footer */}
         <footer
           style={{

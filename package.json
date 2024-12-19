@@ -20,6 +20,7 @@
     "react-scripts": "5.0.1",
     "simplebar": "^6.2.7",
     "simplebar-react": "^3.2.6",
+    "swiper": "^11.1.15",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

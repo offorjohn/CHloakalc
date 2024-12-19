@@ -5,12 +5,16 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import CssBaseline from "@mui/material/CssBaseline";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
-import TelegramIcon from "./telegram";
-
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Slide from "@mui/material/Slide";
 import Grid from "@mui/material/Grid";
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -27,19 +31,37 @@ function HideOnScroll(props) {
 
 HideOnScroll.propTypes = {
   children: PropTypes.element,
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
   window: PropTypes.func,
 };
 
-export default function HideAppBar(props) {
-  const texts = ["30 DAY GUARANTEE!", "40% OFF TODAY ONLY!", "Free Shipping!"];
+export default function App(props) {
   const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [, setIsMobile] = React.useState(false);
   const [isSliding, setIsSliding] = React.useState(false);
 
+  const texts = ["30 DAY GUARANTEE!", "40% OFF TODAY ONLY!", "Free Shipping!"];
+  const carouselItems = [
+    {
+      mediaSrc: "/assets/background/calc.png",
+      type: "image",
+      title: "Learn Web Development",
+      description: "Learn Web Development",
+    },
+    {
+      mediaSrc: "/assets/background/calc1.png",
+      type: "image",
+      title: "Create Stunning Graphics",
+      description: "Create Stunning Graphics",
+    },
+    {
+      mediaSrc: "/assets/background/calc2.png",
+      type: "image",
+      title: "Photography Essentials",
+      description: "Capture beautiful moments with your camera.",
+    },
+  ];
 
+  
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSlide = React.useCallback((direction) => {
@@ -60,12 +82,19 @@ export default function HideAppBar(props) {
 
   React.useEffect(() => {
     const intervalId = setInterval(() => {
-      handleSlide("next"); // Automatically go to the next slide every 3 seconds
-    }, 3000); // 3 seconds interval
-
-    // Clean up the interval when the component is unmounted
+      setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
+    }, 3000);
     return () => clearInterval(intervalId);
-  }, [handleSlide, isSliding]);
+  }, [texts.length]);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 600);
+    };
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <React.Fragment>
@@ -168,93 +197,73 @@ export default function HideAppBar(props) {
         />
 
         <Grid container justifyContent="center">
-          <Grid item xs={12} md={6}>
-            {" "}
-            {/* Full width on small screens, half on medium+ */}
+          <Grid item xs={12} md={8}>
             <Container style={{ flex: "1" }}>
-              <Box
-                sx={{
-                  my: 1,
-                  mt: 25,
-                  ml: {
-                    xs: 0, // No left margin on extra-small screens
-                    sm: 0, // No left margin on small screens
-                    md: 24, // Apply margin-left of 24 on medium screens and above
-                  },
-                }}
-              >
-                <Box
-                  sx={{
-                    position: "relative",
-                    width: {
-                      xs: "100%", // Width is 100% on smaller screens
-                      md: "130%", // Width is 130% on medium screens and above
-                    },
-                    height: "100%",
+              <Box sx={{ my: 1, mt: 24 }}>
+                <Swiper 
+                  modules={[Navigation, Pagination]}
+                  navigation
+                  pagination={{ clickable: true }}
+                  spaceBetween={20}
+                  slidesPerView={1}
+                  style={{
+                    borderRadius: "15px",
+                    overflow: "hidden",
                   }}
+                  className="custom-swiper"
                 >
-                  <img
-                    src="/assets/background/calc.png"
-                    alt="Work in progress"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      borderRadius: "15px",
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      position: "absolute", // Inside the image
-                      bottom: { xs: -180, md: "auto" }, // Bottom position for mobile
-                      left: { xs: "50%", md: -230 }, // Centered horizontally on mobile, left on large
-                      top: { md: 135 }, // Positioned at the top on large screens
-                      transform: { xs: "translateX(-50%)", md: "none" }, // Centered horizontally on mobile
-                      width: { xs: "110%", md: "42%" }, // Adjust width based on screen size
-                      border: "transparent", // Border width and style
-
-                      borderColor: "transparent", // Set the border color to transparent, // Set the border color to white
-                      padding: 5,
-                    }}
-                  >
-                  </Box>
-                </Box>
+                  {carouselItems.map((item, index) => (
+                    <SwiperSlide key={index}>
+                      {item.type === "image" && (
+                        <img
+                          src={item.mediaSrc}
+                          alt={item.title}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                            borderRadius: "15px",
+                          }}
+                        />
+                      )}
+                    </SwiperSlide>
+                  ))}
+                </Swiper>
               </Box>
-              <Typography
-          sx={{
-            mt: "10px",
-            fontSize: "20px", // Smaller font size for TM
-            borderRadius: '15px',
-
-            background: "linear-gradient(to right, #7c3aed, #ec4899, #ef4444)", // Gradient
-          }}
-        >
-          YOU FOUND US! Site under maintenance. Reach out to our VIP customer
-          service to ORDER NOW!
-        </Typography>
             </Container>
           </Grid>
         </Grid>
       </div>
-      
 
-      {/* Footer */}
       <footer
         style={{
-          backgroundColor: "white", // Set the footer background to white
-          color: "black", // Set text color for contrast
+          backgroundColor: "white",
+          color: "black",
           textAlign: "center",
           padding: "10px 0",
-          borderTop: "1px solid #ddd", // Optional: Add a light border for separation
+          borderTop: "1px solid #ddd",
         }}
       >
         <Typography variant="body2">
-          © 2024 CHloakCalc. All Rights Reserved.
+          © 2019 Simple React Page. All Rights Reserved.
         </Typography>
-
-        {/* Include the Telegram Icon at the bottom */}
-        <TelegramIcon />
       </footer>
+
+      <style>
+        {`
+          /* Set the cursor for navigation buttons to pointer (gray) */
+          .custom-swiper .swiper-button-next,
+          .custom-swiper .swiper-button-prev {
+            cursor: pointer;
+            color: gray;
+          }
+
+          /* For pagination controls */
+          .swiper-pagination-bullet {
+            background-color: gray !important;
+          }
+        `}
+      </style>
     </React.Fragment>
   );
 }

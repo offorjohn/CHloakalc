@@ -23,17 +23,17 @@ export default function TelegramIcon() {
         `}
       </style>
 
-      {/* Floating Telegram icon component */}
+      {/* Floating WhatsApp icon component */}
       <Box
         component="a"
-        href="https://t.me/otpninja" // Replace with your Telegram link
+        href="https://wa.link/9ugrwz" // Replace with your WhatsApp link
         target="_blank"
         sx={{
           position: 'fixed',
-          bottom: 10,  // Distance from the bottom of the page
-          right: 16,   // Distance from the right of the page
+          bottom: 10, // Distance from the bottom of the page
+          right: 16, // Distance from the right of the page
           zIndex: 1000,
-          backgroundColor: '#0088cc', // Telegram's official color
+          backgroundColor: '#25D366', // WhatsApp's official color
           borderRadius: '50%',
           width: 50,
           height: 50,
@@ -45,12 +45,12 @@ export default function TelegramIcon() {
           transition: 'all 0.3s ease',
           animation: 'growShrink 1s ease-in-out infinite', // Apply the grow and shrink animation
           '&:hover': {
-            backgroundColor: '#007ab8', // Darken the color on hover
+            backgroundColor: '#20B954', // Darken the color on hover
             transform: 'scale(1.1)', // Slightly enlarge the icon on hover
           },
         }}
       >
-        <Icon icon="mdi:telegram" width={30} style={{ fontWeight: 'bold' }} /> {/* Larger icon */}
+        <Icon icon="mdi:whatsapp" width={30} style={{ fontWeight: 'bold' }} /> {/* Larger WhatsApp icon */}
       </Box>
     </>
   );

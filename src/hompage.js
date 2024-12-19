@@ -7,8 +7,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import TelegramIcon from "./telegram";
 
-import Box from "@mui/material/Box";
-import Container from "@mui/material/Container";
 import Slide from "@mui/material/Slide";
 import Grid from "@mui/material/Grid";
 
@@ -167,74 +165,38 @@ export default function HideAppBar(props) {
           }}
         />
 
-        <Grid container justifyContent="center">
-          <Grid item xs={12} md={6}>
-            {" "}
-            {/* Full width on small screens, half on medium+ */}
-            <Container style={{ flex: "1" }}>
-              <Box
-                sx={{
-                  my: 1,
-                  mt: 25,
-                  ml: {
-                    xs: 0, // No left margin on extra-small screens
-                    sm: 0, // No left margin on small screens
-                    md: 24, // Apply margin-left of 24 on medium screens and above
-                  },
-                }}
-              >
-                <Box
-                  sx={{
-                    position: "relative",
-                    width: {
-                      xs: "100%", // Width is 100% on smaller screens
-                      md: "130%", // Width is 130% on medium screens and above
-                    },
-                    height: "100%",
-                  }}
-                >
-                  <img
-                    src="/assets/background/calc.png"
-                    alt="Work in progress"
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      borderRadius: "15px",
-                    }}
-                  />
-                  <Box
-                    sx={{
-                      position: "absolute", // Inside the image
-                      bottom: { xs: -180, md: "auto" }, // Bottom position for mobile
-                      left: { xs: "50%", md: -230 }, // Centered horizontally on mobile, left on large
-                      top: { md: 135 }, // Positioned at the top on large screens
-                      transform: { xs: "translateX(-50%)", md: "none" }, // Centered horizontally on mobile
-                      width: { xs: "110%", md: "42%" }, // Adjust width based on screen size
-                      border: "transparent", // Border width and style
+<Grid container alignItems="center" justifyContent="center" spacing={2} sx={{ mt: 2 }}>
+  {/* Image Section */}
+  <Grid item xs={12} md={6}>
+    <img
+      src="/assets/background/calc.png"
+      alt="Work in progress"
+      style={{
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        borderRadius: "15px",
+      }}
+    />
+  </Grid>
 
-                      borderColor: "transparent", // Set the border color to transparent, // Set the border color to white
-                      padding: 5,
-                    }}
-                  >
-                  </Box>
-                </Box>
-              </Box>
-              <Typography
-          sx={{
-            mt: "10px",
-            fontSize: "20px", // Smaller font size for TM
-            borderRadius: '15px',
+  {/* Typography Section */}
+  <Grid item xs={12} md={6}>
+    <Typography
+      sx={{
+        fontSize: "20px", // Font size for TM
+        borderRadius: "15px",
+        background: "linear-gradient(to right, #7c3aed, #ec4899, #ef4444)", // Gradient
+        color: "white", // Ensure text is visible against gradient
+        padding: "16px", // Add padding for better spacing
+        textAlign: "center", // Center-align text
+      }}
+    >
+      YOU FOUND US! Site under maintenance. Reach out to our VIP customer service to ORDER NOW!
+    </Typography>
+  </Grid>
+</Grid>
 
-            background: "linear-gradient(to right, #7c3aed, #ec4899, #ef4444)", // Gradient
-          }}
-        >
-          YOU FOUND US! Site under maintenance. Reach out to our VIP customer
-          service to ORDER NOW!
-        </Typography>
-            </Container>
-          </Grid>
-        </Grid>
       </div>
       
 

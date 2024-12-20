@@ -185,7 +185,7 @@ export default function HideAppBar(props) {
                     marginBottom: 2, // Optional: Add some space below for separation
                   }}
                 >
-                  Hello,👋 welcome, the best SMS verification site. If you have
+                  Hello,👋 welcome, If you have
                   any issue or you need assistance, we are always active! What
                   can we help you with??
                   <br />

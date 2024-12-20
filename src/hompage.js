@@ -134,10 +134,26 @@ export default function HideAppBar(props) {
                   <Typography
                     variant="body2"
                     fontWeight="bold"
-                    sx={{ fontSize: "1.3rem", marginLeft: -2 }}
+                    sx={{
+                      fontSize: "1.3rem",
+                      marginLeft: -6,
+                      display: "inline-flex",
+                      alignItems: "flex-start",
+                    }}
                   >
-                    OTP NINJA CHAT
+                    CHloakCalc
+                    <Typography
+                      component="sup"
+                      sx={{
+                        fontSize: "0.8rem", // Adjust size for TM
+                        lineHeight: 1,
+                        marginLeft: "4px", // Add spacing from text
+                      }}
+                    >
+                      ™
+                    </Typography>
                   </Typography>
+
                   <Typography
                     sx={{ color: "text.secondary", mb: 1.5, marginLeft: -13 }}
                   >
@@ -169,9 +185,9 @@ export default function HideAppBar(props) {
                     marginBottom: 2, // Optional: Add some space below for separation
                   }}
                 >
-                  Hello,👋 welcome, the best SMS verification site. If you
-                  have any issue or you need assistance, we are always active!
-                  What can we help you with??
+                  Hello,👋 welcome, the best SMS verification site. If you have
+                  any issue or you need assistance, we are always active! What
+                  can we help you with??
                   <br />
                 </Typography>
               </Box>

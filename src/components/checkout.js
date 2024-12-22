@@ -1,4 +1,3 @@
-
 import * as React from "react";
 import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
@@ -10,7 +9,8 @@ import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Slide from "@mui/material/Slide";
 import Grid from "@mui/material/Grid";
-
+import Stack from "@mui/material/Stack";
+import Button from "@mui/material/Button";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -41,6 +41,8 @@ export default function App(props) {
   const [isSliding, setIsSliding] = React.useState(false);
 
   const texts = ["30 DAY GUARANTEE!", "40% OFF TODAY ONLY!", "Free Shipping!"];
+
+  const swiperRef = React.useRef(null);
   const carouselItems = [
     {
       mediaSrc: "/assets/background/calc.png",
@@ -62,12 +64,28 @@ export default function App(props) {
     },
   ];
 
-  
+  const handlePrev = () => {
+    if (currentIndex > 0) {
+      setCurrentIndex((prevIndex) => prevIndex - 1);
+      swiperRef.current?.slidePrev(); // Assuming swiperRef controls your carousel
+    }
+  };
+
+  const handleNext = () => {
+    if (currentIndex < totalImages - 1) {
+      setCurrentIndex((prevIndex) => prevIndex + 1);
+      swiperRef.current?.slideNext(); // Assuming swiperRef controls your carousel
+    }
+  };
+
+  const totalImages = carouselItems.filter(
+    (item) => item.type === "image"
+  ).length;
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const handleSlide = React.useCallback((direction) => {
     if (isSliding) return; // Prevent overlapping slides
-    setIsSliding(true);
+    setIsSliding(false);
 
     setTimeout(() => {
       setCurrentIndex((prevIndex) => {
@@ -77,16 +95,9 @@ export default function App(props) {
           return (prevIndex - 1 + texts.length) % texts.length;
         }
       });
-      setIsSliding(false);
+      setIsSliding(true);
     }, 500); // Slide duration
   });
-
-  React.useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % texts.length);
-    }, 3000);
-    return () => clearInterval(intervalId);
-  }, [texts.length]);
 
   React.useEffect(() => {
     const handleResize = () => {
@@ -96,6 +107,9 @@ export default function App(props) {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Disable swipe functionality on large screens
+  const isLargeScreen = window.innerWidth > 600;
 
   return (
     <React.Fragment>
@@ -201,39 +215,488 @@ export default function App(props) {
           <Grid item xs={12} md={8}>
             <Container style={{ flex: "1" }}>
               <Box sx={{ my: 1, mt: 24 }}>
-                <Swiper 
+                <Swiper
                   modules={[Navigation, Pagination]}
-                  navigation
+                  onSwiper={(swiper) => (swiperRef.current = swiper)} // Store Swiper instance
                   pagination={{ clickable: true }}
-                  spaceBetween={20}
-                  slidesPerView={1}
+                  allowTouchMove={!isLargeScreen} // Disable swipe on large screens
+                  slidesPerView={1} // Default to 1 image for small screens
+                  breakpoints={{
+                    600: {
+                      slidesPerView: 1, // Keep one main slide
+                      spaceBetween: 15, // Reduce space between slides on larger screenss
+                    },
+                  }}
                   style={{
                     borderRadius: "15px",
                     overflow: "hidden",
                   }}
-                  className="custom-swiper"
                 >
                   {carouselItems.map((item, index) => (
                     <SwiperSlide key={index}>
-                      {item.type === "image" && (
-                        <img
-                          src={item.mediaSrc}
-                          alt={item.title}
-                          style={{
-                            width: "100%",
-                            height: "100%",
-                            objectFit: "cover",
-                            borderRadius: "15px",
+                      <Grid container spacing={2}>
+                        {/* First Image - Always on top */}
+                        <Grid
+                          item
+                          xs={12}
+                          md={7}
+                          sx={{
+                            height: { xs: "330px", md: "550px", lg: "450px" },
+                            width: { xs: "100%", md: "40%", lg: "40%" },
                           }}
-                        />
-                      )}
+                        >
+                          <img
+                            src={item.mediaSrc}
+                            alt={item.title}
+                            style={{
+                              width: "94%",
+                              height: "100%", // height will now be controlled by the Grid container
+                              objectFit: "cover",
+                              borderRadius: "10px",
+                            }}
+                          />
+                        </Grid>
+                        <Typography
+                          sx={{
+                            paddingLeft: "26px", // Ensure consistent left padding
+                            marginTop: "12px", // Move MY STORE down a bit
+                            color: "#a0a0a0", // Lighter gray color
+                            textAlign: "left", // Align text to the left
+                            display: { xs: "none", sm: "block" }, // Hide on small screens, show on larger screens
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              marginBottom: "5px", // Add spacing between MY STORE and the next element
+                            }}
+                          >
+                            MY STORE
+                          </Typography>
+
+                          <Typography
+                            sx={{
+                              fontWeight: "bold",
+                              color: "#303030", // Darker gray color
+                              fontSize: "24px", // Adjust the font size to make it larger
+                              marginBottom: "5px", // Add spacing between the title and reviews
+                            }}
+                          >
+                            CHloakCalc<sup>TM</sup>
+                          </Typography>
+
+                          <Typography
+                            gutterBottom
+                            sx={{
+                              color:
+                                "rgb(245 158 11 / var(--tw-text-opacity, 1))",
+                              fontSize: 18,
+                              marginBottom: "20px", // Add spacing between the review section and the price section
+                            }}
+                          >
+                            ★★★★★{" "}
+                            <span
+                              style={{
+                                fontSize: 19,
+                                fontWeight: "semi-bold",
+                                color: "#a0a0a0",
+                              }}
+                            >
+                              15 Reviews
+                            </span>
+                          </Typography>
+
+                          <Typography
+                            gutterBottom
+                            sx={{
+                              fontSize: 14,
+                              display: "flex", // To align prices in a row
+                              gap: "10px", // Space between the old and new prices
+                              marginBottom: "10px", // Add spacing between the price section and the color section
+                            }}
+                          >
+                            <span
+                              style={{
+                                textDecoration: "line-through",
+                                color: "#a0a0a0",
+                              }}
+                            >
+                              $186.00 USD
+                            </span>
+                            <span
+                              style={{
+                                fontSize: 16,
+                                padding: "0 5px", // Padding around the sale price
+                                borderRadius: "3px", // Rounded corners for the background
+                              }}
+                            >
+                              $109.00 USD
+                            </span>
+
+                            <Typography
+                              sx={{
+                                backgroundColor: "#000000", // Black background for "sale"
+                                color: "#e0e0e0", // White text color for "sale"
+                                padding: "0 9px", // Padding around the "sale" text
+                                borderRadius: "13px", // Optional rounded corners for the background
+                              }}
+                            >
+                              sale
+                            </Typography>
+                          </Typography>
+
+                          <Typography
+                            sx={{
+                              
+                              marginBottom: "10px", // Add spacing between the price section and the color section
+                              fontSize: "16px",
+                              marginTop: "20px", // Add spacing between the color label and the next content
+                            }}
+                          >
+                            Color
+                          </Typography>
+                          <Typography
+                            sx={{
+                              
+                              marginBottom: "10px", // Add spacing between the price section and the color section
+                              backgroundColor: "#000000", // Black background for "sale"
+                              color: "#e0e0e0", // White text color for "sale"
+                              padding: "0 14px", // Padding around the "sale" text
+                              borderRadius: "6px", // Optional rounded corners for the background
+                              display: "inline-block", // Prevents the background from stretching the full width
+                              fontWeight: "bold",
+                            }}
+                          >
+                            Black
+                          </Typography>
+                          <Typography
+                            sx={{
+                              
+                              marginBottom: "10px", // Add spacing between the price section and the color section
+                              fontSize: "16px",
+                              marginTop: "20px", // Add spacing between the color label and the next content
+                            }}
+                          >
+                            Quantity
+                          </Typography>
+
+
+                          <Stack
+          direction="column" // Stack the buttons vertically
+          spacing={2} // Add space between them
+          sx={{
+            display: { xs: "none", sm: "block" }, // Make it visible only on small screens
+            alignItems: "center", // Center the buttons hor
+            // 
+            marginLeft: '3px', // Moves the buttons to the right slightly on mobileizontally on mobile
+
+           
+          }}
+        >
+          
+         <Button
+           sx={{
+               width: "120%", // Makes the button wider on mobile
+               
+               padding: "12px", // Optional: Adds padding to make the button taller
+               borderColor: "#000000", // Black border color
+               color: "#707070", // Text color (black)
+                borderWidth: "1px", // Adjusts the border width (optional)
+                
+               borderStyle: "solid", // Makes sure the border is visible
+               
+              }}
+            >
+             Add to Cart
+           </Button>
+           <Button
+             variant="contained"
+            endIcon={
+             <Box
+               sx={{
+              backgroundColor: "white", // White background
+               padding: "2px 3px",       // Padding for the text
+               borderRadius: "4px",      // Optional: Rounded corners
+               color: "#707070", // Text color (black)
+             fontWeight: "bold",       // Bold text
+      
+           }}
+           >
+            Pay
+         </Box>
+  }
+  sx={{
+    width: "120%", // Makes the button wider on mobile
+    padding: "12px", // Adds padding to make the button taller
+  }}
+>
+  <Typography component="span">
+    Buy with{" "}
+    <Typography
+      component="span"
+      sx={{
+        fontSize: "1em", // Larger font size for "Shop"
+        fontWeight: "bold", // Optional: Make it bold for emphasis
+      }}
+    >
+      Shop
+    </Typography>
+  </Typography>
+</Button>
+        </Stack>
+                        </Typography>
+                      </Grid>
                     </SwiperSlide>
                   ))}
                 </Swiper>
+
+                <Typography
+                  variant="body1"
+                  align="center"
+                  sx={{
+                    marginTop: "10px",
+                    display: { xs: "flex", md: "none" }, // Flex on small screens, none on medium and larger
+                    alignItems: "center",
+                    justifyContent: "center",
+                    gap: "10px",
+                  }}
+                >
+                  <span
+                    style={{
+                      cursor: "pointer",
+                      color: "gray",
+                      fontSize: "16px", // Adjust font size as needed
+                    }}
+                    onClick={handlePrev}
+                  >
+                    {"<"} {/* Previous arrow */}
+                  </span>
+
+                  {`${currentIndex + 1} / ${totalImages}`}
+
+                  <span
+                    style={{
+                      cursor: "pointer",
+                      color: "gray",
+                      fontSize: "16px", // Adjust font size as needed
+                    }}
+                    onClick={handleNext}
+                  >
+                    {">"} {/* Next arrow */}
+                  </span>
+                </Typography>
               </Box>
             </Container>
           </Grid>
         </Grid>
+        <Typography
+          sx={{
+            paddingLeft: "26px", // Ensure consistent left padding
+            marginTop: "12px", // Move MY STORE down a bit
+            color: "#a0a0a0", // Lighter gray color
+            textAlign: "left", // Align text to the left
+            display: { sm: "none" }, // Hide on small screens, show on larger screens
+          }}
+        >
+          MY STORE
+          <Typography
+            sx={{
+              fontWeight: "bold",
+              color: "#303030", // Darker gray color
+              fontSize: "24px", // Adjust the font size to make ist larger
+            }}
+          >
+            CHloakCalc<sup>TM</sup>
+          </Typography>
+          <Typography
+            gutterBottom
+            sx={{
+              color: "rgb(245 158 11 / var(--tw-text-opacity, 1))", // Gold color for stars
+              fontSize: 18,
+            }}
+          >
+            ★★★★★{" "}
+            <span
+              style={{
+                fontSize: 15,
+                fontWeight: "semi-bold",
+                color: "#a0a0a0",
+              }}
+            >
+              15 Reviews
+            </span>
+          </Typography>
+          <Typography
+            gutterBottom
+            sx={{
+              fontSize: 14,
+              display: "flex", // To align prices in a row
+              gap: "10px", // Space between the old and new prices
+              marginTop: "13px",
+            }}
+          >
+            <span style={{ textDecoration: "line-through", color: "#a0a0a0" }}>
+              $186.00 USD
+            </span>
+            <span
+              style={{
+                fontSize: 16,
+                padding: "0 5px", // Padding around the sale price
+                borderRadius: "3px", // Rounded corners for the background
+              }}
+            >
+              $109.00 USD
+            </span>
+
+            <Typography
+              sx={{
+                backgroundColor: "#000000", // Black background for "sale"
+                color: "#e0e0e0", // White text color for "sale"
+                padding: "0 9px", // Padding around the "sale" text
+                borderRadius: "13px", // Optional rounded corners for the background
+              }}
+            >
+              sale
+            </Typography>
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: "16px",
+            }}
+          >
+            Color
+          </Typography>
+          <Typography
+            sx={{
+              marginTop: "7px",
+              backgroundColor: "#000000", // Black background for "sale"
+              color: "#e0e0e0", // White text color for "sale"
+              padding: "0 14px", // Padding around the "sale" text
+              borderRadius: "10px", // Optional rounded corners for the background
+              display: "inline-block", // Prevents the background from stretching the full width
+              fontWeight: "bold",
+            }}
+          >
+            Black
+          </Typography>
+          <Typography
+            sx={{
+              marginTop: "7px",
+              fontSize: "16px",
+            }}
+          >
+            Quantity
+          </Typography>
+        </Typography>
+
+        <Stack direction="row" spacing={2}>
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" }, // Hidden on small screens, visible on medium and larger
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: "14px", // Rounded corners
+              padding: "8px 16px", // Spacing inside the box
+              cursor: "pointer", // Pointer cursor to indicate it's clickable
+            }}
+          >
+            <img
+              src="/assets/background/calc2.png"
+              alt="assets logo"
+              style={{
+                width: 260,
+                height: 260,
+                marginLeft: "417%",
+                borderRadius: "8px",
+                marginRight: 8,
+              }} // Spacing between icon and text
+            />
+          </Box>
+
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex" }, // Hidden on small screens, visible on medium and larger
+              alignItems: "center",
+              justifyContent: "center",
+              borderRadius: "14px", // Rounded corners
+              padding: "8px 16px", // Spacing inside the box
+              cursor: "pointer", // Pointer cursor to indicate it's clickable
+            }}
+          >
+            <img
+              src="/assets/background/calc1.png"
+              alt="assets logo"
+              style={{
+                width: 260,
+                height: 260,
+                marginLeft: "-36%",
+                borderRadius: "8px",
+                marginRight: 8,
+              }} // Spacing between icon and text
+            />
+          </Box>
+        </Stack>
+
+        <Stack
+          direction="column" // Stack the buttons vertically
+          spacing={2} // Add space between them
+          sx={{
+            display: { xs: "block", sm: "none" }, // Make it visible only on small screens
+            alignItems: "center", // Center the buttons hor
+            // 
+            marginLeft: '25px', // Moves the buttons to the right slightly on mobileizontally on mobile
+
+           
+          }}
+        >
+
+         <Button
+           sx={{
+               width: "95%", // Makes the button wider on mobile
+               
+               padding: "12px", // Optional: Adds padding to make the button taller
+               borderColor: "#000000", // Black border color
+               color: "#707070", // Text color (black)
+                borderWidth: "1px", // Adjusts the border width (optional)
+               borderStyle: "solid", // Makes sure the border is visible
+              }}
+            >
+             Add to Cart
+           </Button>
+           <Button
+             variant="contained"
+            endIcon={
+             <Box
+               sx={{
+              backgroundColor: "white", // White background
+               padding: "2px 3px",       // Padding for the text
+               borderRadius: "4px",      // Optional: Rounded corners
+               color: "#707070", // Text color (black)
+             fontWeight: "bold",       // Bold text
+      
+           }}
+           >
+            Pay
+         </Box>
+  }
+  sx={{
+    width: "95%", // Makes the button wider on mobile
+    padding: "12px", // Adds padding to make the button taller
+  }}
+>
+  <Typography component="span">
+    Buy with{" "}
+    <Typography
+      component="span"
+      sx={{
+        fontSize: "1em", // Larger font size for "Shop"
+        fontWeight: "bold", // Optional: Make it bold for emphasis
+      }}
+    >
+      Shop
+    </Typography>
+  </Typography>
+</Button>
+        </Stack>
       </div>
 
       <footer
@@ -246,7 +709,7 @@ export default function App(props) {
         }}
       >
         <Typography variant="body2">
-          © 2019 Simple React Page. All Rights Reserved.
+          © 2024 CHloakCalc Inc. All Rights Reserved.
         </Typography>
       </footer>
 

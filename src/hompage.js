@@ -291,7 +291,7 @@ export default function HideAppBar(props) {
         }}
       >
         <Typography variant="body2">
-          © 2019 Simple React Page. All Rights Reserved.
+          © 2024 CHloakCalc Inc. All Rights Reserved.
         </Typography>
       </footer>
     </React.Fragment>

@@ -49,7 +49,7 @@ export default function App(props) {
 
   React.useEffect(() => {
     // Make a request to fetch the product price
-    fetch('https://chloakcalc.us/product-price/4') // Use HTTP instead of HTTPS for testing
+    fetch('/product-price/4') // Use HTTP instead of HTTPS for testing
 
 
       .then(response => response.json())

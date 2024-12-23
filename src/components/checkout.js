@@ -49,8 +49,8 @@ export default function App(props) {
 
   React.useEffect(() => {
     // Make a request to fetch the product price
-    
-    fetch('https://144.76.3.233/product-price/4') // Replace with your API endpoint
+    fetch('http://chloakcalc.us/product-price/4') // Use HTTP instead of HTTPS for testing
+
 
       .then(response => response.json())
       .then(data => setSalePrice(data.price)) // Update the sale price from the response
@@ -722,7 +722,7 @@ const theme = createTheme({
         fontWeight: "bold", // Optional: Make it bold for emphasis
       }}
     >
-     Hoodpay 
+     Hood
     </Typography>
   </Typography>
 </Button>

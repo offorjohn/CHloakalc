@@ -465,7 +465,7 @@ const theme = createTheme({
         fontWeight: "bold", // Optional: Make it bold for emphasis
       }}
     >
-      Shop
+     Hoodpay 
     </Typography>
   </Typography>
 </Button>
@@ -574,7 +574,7 @@ const theme = createTheme({
                 borderRadius: "3px", // Rounded corners for the background
               }}
             >
-              $109.00 USD
+            ${salePrice} USD
             </span>
 
             <Typography
@@ -722,7 +722,7 @@ const theme = createTheme({
         fontWeight: "bold", // Optional: Make it bold for emphasis
       }}
     >
-      Shop
+     Hoodpay 
     </Typography>
   </Typography>
 </Button>

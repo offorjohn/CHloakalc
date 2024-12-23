@@ -465,7 +465,7 @@ const theme = createTheme({
         fontWeight: "bold", // Optional: Make it bold for emphasis
       }}
     >
-     Hoodpay 
+     Hood
     </Typography>
   </Typography>
 </Button>

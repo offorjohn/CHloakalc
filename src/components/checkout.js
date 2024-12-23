@@ -8,6 +8,7 @@ import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Slide from "@mui/material/Slide";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import Grid from "@mui/material/Grid";
 import Stack from "@mui/material/Stack";
 import Button from "@mui/material/Button";
@@ -40,9 +41,22 @@ export default function App(props) {
   const [, setIsMobile] = React.useState(false);
   const [isSliding, setIsSliding] = React.useState(false);
 
+  const [salePrice, setSalePrice] = React.useState(null);
+
   const texts = ["30 DAY GUARANTEE!", "40% OFF TODAY ONLY!", "Free Shipping!"];
 
   const swiperRef = React.useRef(null);
+
+  React.useEffect(() => {
+    // Make a request to fetch the product price
+    
+    fetch('http://localhost:8080/product-price/4') // Replace with your API endpoint
+
+      .then(response => response.json())
+      .then(data => setSalePrice(data.price)) // Update the sale price from the response
+      .catch(error => console.error('Error fetching price:', error));
+  }, []);
+  
   const carouselItems = [
     {
       mediaSrc: "/assets/background/calc.png",
@@ -63,6 +77,19 @@ export default function App(props) {
       description: "Capture beautiful moments with your camera.",
     },
   ];
+
+
+const theme = createTheme({
+  breakpoints: {
+    values: {
+      xs: 0,     // Extra small screens start at 0px
+      sm: 480,   // Small screens start at 480px
+      md: 960,   // Medium screens start at 960px
+      lg: 1280,  // Large screens start at 1280px
+      xl: 1920,  // Extra large screens start at 1920px
+    },
+  },
+});
 
   const handlePrev = () => {
     if (currentIndex > 0) {
@@ -329,7 +356,7 @@ export default function App(props) {
                                 borderRadius: "3px", // Rounded corners for the background
                               }}
                             >
-                              $109.00 USD
+                              ${salePrice} USD
                             </span>
 
                             <Typography
@@ -449,17 +476,18 @@ export default function App(props) {
                   ))}
                 </Swiper>
 
-                <Typography
-                  variant="body1"
-                  align="center"
-                  sx={{
-                    marginTop: "10px",
-                    display: { xs: "flex", md: "none" }, // Flex on small screens, none on medium and larger
-                    alignItems: "center",
-                    justifyContent: "center",
-                    gap: "10px",
-                  }}
-                >
+                <ThemeProvider theme={theme}>
+      <Typography
+        variant="body1"
+        align="center"
+        sx={{
+          marginTop: "10px",
+          display: { xs: "flex", sm: "none" }, // Visible on screens <480px, hidden on 480px and above
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "10px",
+        }}
+      >
                   <span
                     style={{
                       cursor: "pointer",
@@ -483,7 +511,9 @@ export default function App(props) {
                   >
                     {">"} {/* Next arrow */}
                   </span>
-                </Typography>
+      </Typography>
+    </ThemeProvider>
+
               </Box>
             </Container>
           </Grid>

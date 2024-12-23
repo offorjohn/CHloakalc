@@ -50,7 +50,7 @@ export default function App(props) {
   React.useEffect(() => {
     // Make a request to fetch the product price
     
-    fetch('http://localhost:8080/product-price/4') // Replace with your API endpoint
+    fetch('https://144.76.3.233/product-price/4') // Replace with your API endpoint
 
       .then(response => response.json())
       .then(data => setSalePrice(data.price)) // Update the sale price from the response

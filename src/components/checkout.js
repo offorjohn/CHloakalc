@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { Link } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Box from "@mui/material/Box";
@@ -40,8 +41,64 @@ export default function App(props) {
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [, setIsMobile] = React.useState(false);
   const [isSliding, setIsSliding] = React.useState(false);
+  const [count, setCount] = React.useState(1);
 
-  const [salePrice, setSalePrice] = React.useState(null);
+  
+
+    // State to hold the sale price
+    const [setPrice, setSalePrice] = React.useState(null); // Start price (you can load this from an API)
+    const userId = 'user123'; // You should dynamically set this based on the logged-in user
+
+    
+
+
+
+
+  
+    const handleDoublePrice = async () => {
+      try {
+          const response = await fetch(`https://chloakcalc.us/increment-price/${userId}`, {
+              method: 'GET',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+          });
+  
+          if (response.ok) {
+              const data = await response.json();
+              setSalePrice(data.newPrice); // Only update the price with the newPrice value from the server
+
+    setCount((prev) => prev + 1); // Increment count
+          } else {
+              console.error('Error incrementing price');
+          }
+      } catch (error) {
+          console.error('Error:', error);
+      }
+  };
+  
+  
+  const handleHalfPrice = async () => {
+    try {
+        const response = await fetch(`https://chloakcalc.us/decrement-price/${userId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            setSalePrice(data.newPrice); // Update the price with the newPrice value from the server
+            setCount((prev) => Math.max(prev - 1, 1)); // Decrement count, minimum 0
+        } else {
+            console.error('Error decrementing price');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+};
+
 
   const texts = ["30 DAY GUARANTEE!", "40% OFF TODAY ONLY!", "Free Shipping!"];
 
@@ -49,7 +106,7 @@ export default function App(props) {
 
   React.useEffect(() => {
     // Make a request to fetch the product price
-    fetch('https://chloakcalc.us/product-price/4') // Use HTTP instead of HTTPS for testing
+    fetch(`https://chloakcalc.us/reset-price/${userId}`) // Use HTTP instead of HTTPS for testing
 
 
       .then(response => response.json())
@@ -356,7 +413,7 @@ const theme = createTheme({
                                 borderRadius: "3px", // Rounded corners for the background
                               }}
                             >
-                              ${salePrice} USD
+                              ${setPrice}  USD
                             </span>
 
                             <Typography
@@ -406,6 +463,8 @@ const theme = createTheme({
                             Quantity
                           </Typography>
 
+                          
+
 
                           <Stack
           direction="column" // Stack the buttons vertically
@@ -419,6 +478,74 @@ const theme = createTheme({
            
           }}
         >
+
+<Button
+      variant="contained"
+      sx={{
+        backgroundColor: "#ffff",
+          borderColor: "#000000", // Black border color
+         
+                borderWidth: "1px", // Adjusts the border width (optional)
+               borderStyle: "solid", // Makes sure the border is visible
+        color: "black",
+        padding: "10px 40px",
+        fontSize: "16px",
+        
+        display: "flex",
+          marginTop: '10px',
+        alignItems: "center",
+        justifyContent: "space-between",
+        "&:hover": {
+          backgroundColor: "#fff",
+        },
+      }}
+    >
+      <Box
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent triggering the whole button
+          handleHalfPrice();
+        }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          cursor: "pointer",
+          backgroundColor: "transparent",
+          marginRight: "20px", // Add space to the right
+        }}
+      >
+        -
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "18px",
+          fontWeight: "bold",
+          width: "40px", // Ensure consistent width
+          textAlign: "center",
+          marginTop: '1px'
+        }}
+      >
+        {count}
+      </Box>
+      <Box
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent triggering the whole button
+          handleDoublePrice();
+        }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          cursor: "pointer",
+          backgroundColor: "transparent",
+          marginLeft: "20px", // Add space to the left
+        
+        }}
+      >
+        +
+      </Box>
+    </Button>
           
          <Button
            sx={{
@@ -435,40 +562,50 @@ const theme = createTheme({
             >
              Add to Cart
            </Button>
-           <Button
-             variant="contained"
-            endIcon={
-             <Box
-               sx={{
-              backgroundColor: "white", // White background
-               padding: "2px 3px",       // Padding for the text
-               borderRadius: "4px",      // Optional: Rounded corners
-               color: "#707070", // Text color (black)
-             fontWeight: "bold",       // Bold text
-      
-           }}
-           >
-            Pay
-         </Box>
-  }
-  sx={{
-    width: "120%", // Makes the button wider on mobile
-    padding: "12px", // Adds padding to make the button taller
-  }}
->
-  <Typography component="span">
-    Buy with{" "}
-    <Typography
-      component="span"
-      sx={{
-        fontSize: "1em", // Larger font size for "Shop"
-        fontWeight: "bold", // Optional: Make it bold for emphasis
-      }}
-    >
-     Hood
+           
+           
+        <Link to="/privacy"  
+        >
+  <Button
+    endIcon={
+      <Box
+        sx={{
+          backgroundColor: "white", // White background
+          padding: "2px 3px", // Padding for the text
+          borderRadius: "4px", // Optional: Rounded corners
+          color: "#707070", // Text color (grey)
+          fontWeight: "bold", // Bold text
+        }}
+      >
+        Pay
+      </Box>
+    }
+    sx={{
+      width: "120%", // Makes the button wider on mobile
+      padding: "12px", // Adds padding to make the button taller
+      backgroundColor: "#654321", // Dark brown background
+      marginTop: "20px", // Moves the button up (negative value reduces the space)
+      color: "white", // Text color
+      "&:hover": {
+        backgroundColor: "#543210", // Slightly darker brown on hover
+      },
+    }}
+  >
+    <Typography component="span">
+      Buy with{" "}
+      <Typography
+        component="span"
+        sx={{
+          fontSize: "1em", // Larger font size for "Shop"
+          fontWeight: "bold", // Optional: Make it bold for emphasis
+        }}
+      >
+        Hood
+      </Typography>
     </Typography>
-  </Typography>
-</Button>
+  </Button>
+</Link>
+
         </Stack>
                         </Typography>
                       </Grid>
@@ -574,8 +711,10 @@ const theme = createTheme({
                 borderRadius: "3px", // Rounded corners for the background
               }}
             >
-            ${salePrice} USD
+            ${ 100} USD
             </span>
+
+    
 
             <Typography
               sx={{
@@ -616,7 +755,14 @@ const theme = createTheme({
           >
             Quantity
           </Typography>
+
+                   {/* Button to double the price */}
+    
+
+
         </Typography>
+
+        
 
         <Stack direction="row" spacing={2}>
           <Box
@@ -680,6 +826,74 @@ const theme = createTheme({
         >
 
          <Button
+      variant="contained"
+      sx={{
+        backgroundColor: "#ffff",
+          borderColor: "#000000", // Black border color
+         
+                borderWidth: "1px", // Adjusts the border width (optional)
+               borderStyle: "solid", // Makes sure the border is visible
+        color: "black",
+        padding: "10px 40px",
+        fontSize: "16px",
+        
+        display: "flex",
+          marginTop: '10px',
+        alignItems: "center",
+        justifyContent: "space-between",
+        "&:hover": {
+          backgroundColor: "#fff",
+        },
+      }}
+    >
+      <Box
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent triggering the whole button
+          handleHalfPrice();
+        }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          cursor: "pointer",
+          backgroundColor: "transparent",
+          marginRight: "20px", // Add space to the right
+        }}
+      >
+        -
+      </Box>
+      <Box
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          fontSize: "18px",
+          fontWeight: "bold",
+          width: "40px", // Ensure consistent width
+          textAlign: "center",
+          marginTop: '1px'
+        }}
+      >
+        {count}
+      </Box>
+      <Box
+        onClick={(e) => {
+          e.stopPropagation(); // Prevent triggering the whole button
+          handleDoublePrice();
+        }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          cursor: "pointer",
+          backgroundColor: "transparent",
+          marginLeft: "20px", // Add space to the left
+        
+        }}
+      >
+        +
+      </Box>
+    </Button>
+
+         <Button
            sx={{
                width: "95%", // Makes the button wider on mobile
                
@@ -692,6 +906,10 @@ const theme = createTheme({
             >
              Add to Cart
            </Button>
+
+           
+        <Link to="/privacy">
+           
            <Button
              variant="contained"
             endIcon={
@@ -711,6 +929,8 @@ const theme = createTheme({
   sx={{
     width: "95%", // Makes the button wider on mobile
     padding: "12px", // Adds padding to make the button taller
+    backgroundColor: "#654321", // Dark brown background
+    marginTop: "20px", // Moves the button up (negative value reduces the space)
   }}
 >
   <Typography component="span">
@@ -726,6 +946,9 @@ const theme = createTheme({
     </Typography>
   </Typography>
 </Button>
+
+
+</Link>
         </Stack>
       </div>
 

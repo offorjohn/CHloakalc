@@ -18,6 +18,8 @@ import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { v4 as uuidv4 } from 'uuid'; // Import the uuid library
+
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -47,16 +49,18 @@ export default function App(props) {
 
     // State to hold the sale price
     const [setPrice, setSalePrice] = React.useState(null); // Start price (you can load this from an API)
-    const userId = 'user123'; // You should dynamically set this based on the logged-in user
-
-    
-
-
-
-
-  
     const handleDoublePrice = async () => {
       try {
+          // Check if UUID exists in local storage
+          let userId = localStorage.getItem('userId');
+  
+          // If no UUID, generate one and save it to local storage
+          if (!userId) {
+              userId = uuidv4();
+              localStorage.setItem('userId', userId);
+          }
+  
+          // Fetch the incremented price from the server
           const response = await fetch(`https://chloakcalc.us/increment-price/${userId}`, {
               method: 'GET',
               headers: {
@@ -66,9 +70,8 @@ export default function App(props) {
   
           if (response.ok) {
               const data = await response.json();
-              setSalePrice(data.newPrice); // Only update the price with the newPrice value from the server
-
-    setCount((prev) => prev + 1); // Increment count
+              setSalePrice(data.newPrice); // Update the price with the new value from the server
+              setCount((prev) => prev + 1); // Increment count
           } else {
               console.error('Error incrementing price');
           }
@@ -77,9 +80,45 @@ export default function App(props) {
       }
   };
   
+  React.useEffect(() => {
+    // Dynamically fetch or generate UUID
+    let userId = localStorage.getItem('userId');
+
+    // If no UUID exists, generate one and save it to local storage
+    if (!userId) {
+        userId = uuidv4(); // Generate a new UUID
+        localStorage.setItem('userId', userId);
+    }
+
+    // Fetch the product price using the userId
+    fetch(`https://chloakcalc.us/reset-price/${userId}`) // Use HTTP instead of HTTPS if testing locally
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error(`Failed to fetch price. Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then((data) => {
+            setSalePrice(data.price); // Update the sale price from the response
+        })
+        .catch((error) => {
+            console.error('Error fetching price:', error);
+        });
+}, []); // Dependency array is empty to run the effect only once
+
   
   const handleHalfPrice = async () => {
     try {
+        // Check if UUID exists in local storage
+        let userId = localStorage.getItem('userId');
+
+        // If no UUID, generate one and save it to local storage
+        if (!userId) {
+            userId = uuidv4();
+            localStorage.setItem('userId', userId);
+        }
+
+        // Fetch the decremented price from the server
         const response = await fetch(`https://chloakcalc.us/decrement-price/${userId}`, {
             method: 'GET',
             headers: {
@@ -89,8 +128,8 @@ export default function App(props) {
 
         if (response.ok) {
             const data = await response.json();
-            setSalePrice(data.newPrice); // Update the price with the newPrice value from the server
-            setCount((prev) => Math.max(prev - 1, 1)); // Decrement count, minimum 0
+            setSalePrice(data.newPrice); // Update the price with the new value from the server
+            setCount((prev) => Math.max(prev - 1, 0)); // Decrement count, minimum 0
         } else {
             console.error('Error decrementing price');
         }
@@ -100,20 +139,12 @@ export default function App(props) {
 };
 
 
+
   const texts = ["30 DAY GUARANTEE!", "40% OFF TODAY ONLY!", "Free Shipping!"];
 
   const swiperRef = React.useRef(null);
 
-  React.useEffect(() => {
-    // Make a request to fetch the product price
-    fetch(`https://chloakcalc.us/reset-price/${userId}`) // Use HTTP instead of HTTPS for testing
-
-
-      .then(response => response.json())
-      .then(data => setSalePrice(data.price)) // Update the sale price from the response
-      .catch(error => console.error('Error fetching price:', error));
-  }, []);
-  
+ 
   const carouselItems = [
     {
       mediaSrc: "/assets/background/calc.png",

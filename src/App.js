@@ -5,9 +5,8 @@ import Privacy from './components/privacy';
 import Private from './components/checkout';
 import Terms from './components/terms';
 
-import { PriceProvider } from './components/PriceContext'; // Import the PriceProvider
 const App = () => (
-  <PriceProvider>
+
   <Routes>
 
    <Route path="/" element={<Home />} />
@@ -15,7 +14,7 @@ const App = () => (
     <Route path="/checkout" element={<Private/>} />
     <Route path="/terms" element={<Terms/>} />
   </Routes> 
-  </PriceProvider>
+
 );
 
 export default App;

@@ -1,19 +1,19 @@
-import  { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Box, CircularProgress, Typography } from '@mui/material';
 import { v4 as uuidv4 } from 'uuid';
 
 const Home = () => {
+  const [loading, setLoading] = useState(true); // Track loading state
+
   useEffect(() => {
     const navigateToCheckout = async () => {
-      // Check if a unique user ID exists in localStorage
       let userId = localStorage.getItem('userId');
       if (!userId) {
-        // Generate a new UUID if not present
         userId = uuidv4();
-        localStorage.setItem('userId', userId); // Save it in localStorage
+        localStorage.setItem('userId', userId);
       }
 
       try {
-        // Fetch the price
         const priceResponse = await fetch(`https://chloakcalc.us/get-price/${userId}`, {
           method: 'GET',
           headers: { 'Content-Type': 'application/json' },
@@ -25,7 +25,6 @@ const Home = () => {
           price = priceData.price;
         }
 
-        // Make the checkout API call
         const options = {
           method: 'POST',
           headers: {
@@ -46,8 +45,6 @@ const Home = () => {
 
         if (checkoutResponse.ok) {
           const checkoutData = await checkoutResponse.json();
-
-          // Navigate to the checkout URL
           if (checkoutData && checkoutData.data && checkoutData.data.url) {
             window.location.href = checkoutData.data.url;
           } else {
@@ -61,13 +58,35 @@ const Home = () => {
       } catch (error) {
         console.error('Error:', error);
         alert('An unexpected error occurred.');
+      } finally {
+        setLoading(false);
       }
     };
 
-    navigateToCheckout(); // Trigger navigation on load
+    navigateToCheckout();
   }, []);
 
-  return null; // Do not render anything as the page redirects immediately
+  return (
+    <Box
+      sx={{
+        minHeight: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center',
+        textAlign: 'center',
+      }}
+    >
+      {loading ? (
+        <>
+          <CircularProgress />
+          <Typography sx={{ marginTop: '20px', fontSize: '1.2rem' }}>
+            Preparing your checkout...
+          </Typography>
+        </>
+      ) : null}
+    </Box>
+  );
 };
 
 export default Home;

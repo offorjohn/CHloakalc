@@ -231,9 +231,8 @@ export default function HideAppBar(props) {
                   my: 1,
                   mt: 25,
                   ml: {
-                    xs: 0, // No left margin on extra-small screens
-                    sm: 0, // No left margin on small screens
-                    md: 24, // Apply margin-left of 24 on medium screens and above
+              
+                    md: 17, // Negative margin for medium screens
                   },
                 }}
               >
@@ -261,10 +260,17 @@ export default function HideAppBar(props) {
                     sx={{
                       position: "absolute", // Inside the image
                       bottom: { xs: -180, md: "auto" }, // Bottom position for mobile
-                      left: { xs: "50%", md: -230 }, // Centered horizontally on mobile, left on large
+                      left: { xs: "50%", md: -120 }, // Centered horizontally on mobile, left on large
                       top: { md: 135 }, // Positioned at the top on large screens
                       transform: { xs: "translateX(-50%)", md: "none" }, // Centered horizontally on mobile
-                      width: { xs: "110%", md: "42%" }, // Adjust width based on screen size
+                      width: {
+                        xs: "90%", // Use most of the screen width on small screens
+                        sm: "70%", // Slightly narrower on small-to-medium screens
+                        md: "50%", // Standard width on medium screens
+                        lg: "40%", // Narrower width on large screens
+                      },
+                      maxWidth: "500px", // Ensure the card doesn't get too large
+                      minWidth: "250px", // Ensure the card doesn't get too small
                       border: "transparent", // Border width and style
 
                       borderColor: "transparent", // Set the border color to transparent, // Set the border color to white

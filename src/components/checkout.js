@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import CssBaseline from "@mui/material/CssBaseline";
 import useScrollTrigger from "@mui/material/useScrollTrigger";
 import Box from "@mui/material/Box";
+import { Divider } from "@mui/material";
 import Container from "@mui/material/Container";
 import Slide from "@mui/material/Slide";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
@@ -20,6 +21,8 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { v4 as uuidv4 } from "uuid"; // Import the uuid library
+
+import Footer from "./footer";
 
 function HideOnScroll(props) {
   const { children, window } = props;
@@ -44,6 +47,31 @@ export default function App(props) {
   const [, setIsMobile] = React.useState(false);
   const [isSliding, setIsSliding] = React.useState(false);
   const [count, setCount] = React.useState(1);
+
+
+
+  const reviews = [
+    {
+      name: "Milek M.",
+      date: "12/12/2024",
+      review:
+        "Sometimes a bit slow. I have used it in class, it's pretty easy to use. The privacy screen is pretty useful. Easy to use, easy to cheat with. Great product.",
+    },
+    { name: "Sara B.", date: "11/19/2024", review: "Good" },
+    { name: "Marico B.", date: "11/15/2024", review: "Soo effective" },
+    {
+      name: "Christ S.",
+      date: "11/13/2024",
+      review:
+        "I haven't checked it yet to see what capabilities it has, but it seems ok!",
+    },
+    { name: "Bing A.", date: "11/02/2024", review: "It's very nice" },
+    {
+      name: "Mag R.",
+      date: "10/13/2024",
+      review: "I love it, I got the full version and it is perfect",
+    },
+  ];
 
   // State to hold the sale price
   const [, setSalePrice] = React.useState(null); // Start price (you can load this from an API)
@@ -355,7 +383,7 @@ export default function App(props) {
                           xs={12}
                           md={7}
                           sx={{
-                            height: { xs: "330px", md: "550px", lg: "450px" },
+                            height: { xs: "330px", md: "580px", lg: "500px" },
                             width: { xs: "100%", md: "40%", lg: "40%" },
                           }}
                         >
@@ -569,14 +597,16 @@ export default function App(props) {
 
                             <Button
                               sx={{
-                                width: "120%", // Makes the button wider on mobile
-
-                                padding: "12px", // Optional: Adds padding to make the button taller
+                                width: {
+                                  xs: "120%", // Wider on mobile screens
+                                  md: "100%", // Reduced width on medium screens
+                                },
+                                padding: "12px", // Adds padding to make the button taller
+                                marginLeft: "10px",
                                 borderColor: "#000000", // Black border color
                                 color: "#707070", // Text color (black)
                                 borderWidth: "1px", // Adjusts the border width (optional)
-
-                                borderStyle: "solid", // Makes sure the border is visible
+                                borderStyle: "solid", // Ensures the border is visible
                               }}
                             >
                               Add to Cart
@@ -589,7 +619,7 @@ export default function App(props) {
                                     sx={{
                                       backgroundColor: "white", // White background
                                       padding: "2px 3px", // Padding for the text
-                                      borderRadius: "4px", // Optional: Rounded corners
+                                      borderRadius: "4px", // Rounded corners
                                       color: "#707070", // Text color (grey)
                                       fontWeight: "bold", // Bold text
                                     }}
@@ -598,10 +628,13 @@ export default function App(props) {
                                   </Box>
                                 }
                                 sx={{
-                                  width: "120%", // Makes the button wider on mobile
+                                  width: {
+                                    xs: "120%", // Wider on mobile screens
+                                    md: "100%", // Reduced width on medium and larger screens
+                                  },
                                   padding: "12px", // Adds padding to make the button taller
                                   backgroundColor: "#654321", // Dark brown background
-                                  marginTop: "20px", // Moves the button up (negative value reduces the space)
+                                  marginTop: "20px", // Moves the button up (adjust spacing as needed)
                                   color: "white", // Text color
                                   "&:hover": {
                                     backgroundColor: "#543210", // Slightly darker brown on hover
@@ -613,8 +646,8 @@ export default function App(props) {
                                   <Typography
                                     component="span"
                                     sx={{
-                                      fontSize: "1em", // Larger font size for "Shop"
-                                      fontWeight: "bold", // Optional: Make it bold for emphasis
+                                      fontSize: "1em", // Larger font size for "Hood"
+                                      fontWeight: "bold", // Bold text for emphasis
                                     }}
                                   >
                                     Hood
@@ -770,52 +803,197 @@ export default function App(props) {
           </Typography>
           {/* Button to double the price */}
         </Typography>
+        <Stack
+          direction="row"
+          spacing={2}
+          justifyContent="center"
+          alignItems="center"
+          sx={{ width: "100%" }}
+        >
+          <Grid
+            container
+            spacing={2}
+            justifyContent="center"
+            alignItems="center"
+          >
+            {/* First Image */}
+            <Grid item xs={12} md={6}>
+              <Box
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "14px",
+                  padding: "8px 16px",
+                  cursor: "pointer",
+                  height: "100%", // Ensures the box takes full height
+                }}
+              >
+                <img
+                  src="/assets/background/calc1.png"
+                  alt="assets logo"
+                  style={{
+                    width: "70%", // Scale the image to take up full width
+                    height: "auto", // Maintain aspect ratio
+                    borderRadius: "8px",
+                  }}
+                />
+              </Box>
+            </Grid>
 
-        <Stack direction="row" spacing={2}>
+            {/* Second Image */}
+            <Grid item xs={12} md={6}>
+              <Box
+                sx={{
+                  display: { xs: "none", md: "flex" },
+                  alignItems: "center",
+                  justifyContent: "center",
+                  borderRadius: "14px",
+                  padding: "8px 16px",
+                  cursor: "pointer",
+                }}
+              >
+                <img
+                  src="/assets/background/calc2.png"
+                  alt="assets logo"
+                  style={{
+                    width: "70%", // Scale the image to take up full width
+                    height: "auto", // Maintain aspect ratio
+                    borderRadius: "8px",
+                  }}
+                />
+              </Box>
+            </Grid>
+          </Grid>
+
           <Box
             sx={{
               display: { xs: "none", md: "flex" }, // Hidden on small screens, visible on medium and larger
-              alignItems: "center",
+              width: { xs: "120%", md: "70%" },
+              padding: "12px",
+              backgroundColor: "transparent", // Transparent background
+              marginTop: "20px",
               justifyContent: "center",
-              borderRadius: "14px", // Rounded corners
-              padding: "8px 16px", // Spacing inside the box
-              cursor: "pointer", // Pointer cursor to indicate it's clickable
+              alignItems: "flex-start",
+              borderRadius: "8px", // Optional: Adds rounded corners
             }}
           >
-            <img
-              src="/assets/background/calc2.png"
-              alt="assets logo"
-              style={{
-                width: 260,
-                height: 260,
-                marginLeft: "417%",
-                borderRadius: "8px",
-                marginRight: 8,
-              }} // Spacing between icon and text
-            />
-          </Box>
+            <Stack direction="column" spacing={2}>
+              {/* Easy USB File Transfer */}
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Typography
+                  component="span"
+                  sx={{
+                    marginLeft: {
+                      xs: "0", // No margin on small screens
+                      sm: "5vw", // 5% of viewport width for small screens
+                      md: "-5vw", // 10% of viewport width for medium screens
+                      lg: "-22vw", // 15% of viewport width for large screens
+                    },
+                    color: "#333333", // Dark grey color
+                    fontWeight: "bold", // Bold text
+                  }}
+                >
+                  {" "}
+                  <span style={{ fontSize: "1.5rem", marginRight: "8px" }}>
+                    •
+                  </span>{" "}
+                  Easy USB File Transfer 🔄
+                </Typography>
+              </Box>
 
-          <Box
-            sx={{
-              display: { xs: "none", md: "flex" }, // Hidden on small screens, visible on medium and larger
-              alignItems: "center",
-              justifyContent: "center",
-              borderRadius: "14px", // Rounded corners
-              padding: "8px 16px", // Spacing inside the box
-              cursor: "pointer", // Pointer cursor to indicate it's clickable
-            }}
-          >
-            <img
-              src="/assets/background/calc1.png"
-              alt="assets logo"
-              style={{
-                width: 260,
-                height: 260,
-                marginLeft: "-36%",
-                borderRadius: "8px",
-                marginRight: 8,
-              }} // Spacing between icon and text
-            />
+              {/* Long Battery Life */}
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Typography
+                  component="span"
+                  sx={{
+                    marginLeft: {
+                      xs: "0", // No margin on small screens
+                      sm: "5vw", // 5% of viewport width for small screens
+                      md: "-5vw", // 10% of viewport width for medium screens
+                      lg: "-22vw", // 15% of viewport width for large screens
+                    },
+                    color: "#333333", // Dark grey color
+                    fontWeight: "bold", // Bold text
+                  }}
+                >
+                  {" "}
+                  <span style={{ fontSize: "1.5rem", marginRight: "8px" }}>
+                    •
+                  </span>{" "}
+                  Long Battery Life 🔋
+                </Typography>
+              </Box>
+
+              {/* Watch Videos & Photos */}
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Typography
+                  component="span"
+                  sx={{
+                    marginLeft: {
+                      xs: "0", // No margin on small screens
+                      sm: "5vw", // 5% of viewport width for small screens
+                      md: "-5vw", // 10% of viewport width for medium screens
+                      lg: "-22vw", // 15% of viewport width for large screens
+                    },
+                    color: "#333333", // Dark grey color
+                    fontWeight: "bold", // Bold text
+                  }}
+                >
+                  {" "}
+                  <span style={{ fontSize: "1.5rem", marginRight: "8px" }}>
+                    •
+                  </span>{" "}
+                  Watch Videos & Photos 📽️
+                </Typography>
+              </Box>
+
+              {/* Built-in Privacy Screen */}
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Typography
+                  component="span"
+                  sx={{
+                    marginLeft: {
+                      xs: "0", // No margin on small screens
+                      sm: "5vw", // 5% of viewport width for small screens
+                      md: "-5vw", // 10% of viewport width for medium screens
+                      lg: "-22vw", // 15% of viewport width for large screens
+                    },
+                    color: "#333333", // Dark grey color
+                    fontWeight: "bold", // Bold text
+                  }}
+                >
+                  {" "}
+                  <span style={{ fontSize: "1.5rem", marginRight: "8px" }}>
+                    •
+                  </span>{" "}
+                  Built-in Privacy Screen 🤐
+                </Typography>
+              </Box>
+
+              {/* 30-Day Money-Back Guarantee (Hidden) */}
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <Typography
+                  component="span"
+                  sx={{
+                    marginLeft: {
+                      xs: "0", // No margin on small screens
+                      sm: "5vw", // 5% of viewport width for small screens
+                      md: "10vw", // 10% of viewport width for medium screens
+                      lg: "-22vw", // 15% of viewport width for large screens
+                    },
+                    color: "#333333", // Dark grey color
+                    fontWeight: "bold", // Bold text
+                  }}
+                >
+                  {" "}
+                  <span style={{ fontSize: "1.5rem", marginRight: "8px" }}>
+                    •
+                  </span>
+                  30-Day Money-Back Guarantee 💸
+                </Typography>
+              </Box>
+            </Stack>
           </Box>
         </Stack>
 
@@ -860,7 +1038,6 @@ export default function App(props) {
                 alignItems: "center",
                 cursor: "pointer",
                 backgroundColor: "transparent",
-                marginRight: "20px", // Add space to the right
               }}
             >
               -
@@ -948,22 +1125,267 @@ export default function App(props) {
             </Button>
           </Link>
         </Stack>
+
+        <Box
+          sx={{
+            display: { xs: "flex", lg: "none", md: "none", sm: "none" }, // Visible on small screens, hidden on large screens
+            width: { xs: "100%", md: "70%" },
+            padding: "12px",
+            backgroundColor: "transparent", // Transparent background
+            marginTop: "20px",
+            justifyContent: "center",
+            alignItems: "flex-start",
+            borderRadius: "8px", // Optional: Adds rounded corners
+          }}
+        >
+          <Stack direction="column" spacing={2}>
+            {/* Easy USB File Transfer */}
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Typography
+                component="span"
+                sx={{
+                  marginLeft: {
+                    xs: "0", // No margin on small screens
+                    sm: "5vw", // 5% of viewport width for small screens
+                    md: "-5vw", // 10% of viewport width for medium screens
+                    lg: "-22vw", // 15% of viewport width for large screens
+                  },
+                  color: "#333333", // Dark grey color
+                  fontWeight: "bold", // Bold text
+                }}
+              >
+                <span style={{ fontSize: "1.5rem", marginRight: "8px" }}>
+                  •
+                </span>{" "}
+                Easy USB File Transfer 🔄
+              </Typography>
+            </Box>
+
+            {/* Long Battery Life */}
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Typography
+                component="span"
+                sx={{
+                  marginLeft: {
+                    xs: "0", // No margin on small screens
+                    sm: "5vw", // 5% of viewport width for small screens
+                    md: "-5vw", // 10% of viewport width for medium screens
+                    lg: "-22vw", // 15% of viewport width for large screens
+                  },
+                  color: "#333333", // Dark grey color
+                  fontWeight: "bold", // Bold text
+                }}
+              >
+                <span style={{ fontSize: "1.5rem", marginRight: "8px" }}>
+                  •
+                </span>{" "}
+                Long Battery Life 🔋
+              </Typography>
+            </Box>
+
+            {/* Watch Videos & Photos */}
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Typography
+                component="span"
+                sx={{
+                  marginLeft: {
+                    xs: "0", // No margin on small screens
+                    sm: "5vw", // 5% of viewport width for small screens
+                    md: "-5vw", // 10% of viewport width for medium screens
+                    lg: "-22vw", // 15% of viewport width for large screens
+                  },
+                  color: "#333333", // Dark grey color
+                  fontWeight: "bold", // Bold text
+                }}
+              >
+                <span style={{ fontSize: "1.5rem", marginRight: "8px" }}>
+                  •
+                </span>{" "}
+                Watch Videos & Photos 📽️
+              </Typography>
+            </Box>
+
+            {/* Built-in Privacy Screen */}
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Typography
+                component="span"
+                sx={{
+                  marginLeft: {
+                    xs: "0", // No margin on small screens
+                    sm: "5vw", // 5% of viewport width for small screens
+                    md: "-5vw", // 10% of viewport width for medium screens
+                    lg: "-22vw", // 15% of viewport width for large screens
+                  },
+                  color: "#333333", // Dark grey color
+                  fontWeight: "bold", // Bold text
+                }}
+              >
+                <span style={{ fontSize: "1.5rem", marginRight: "8px" }}>
+                  •
+                </span>{" "}
+                Built-in Privacy Screen 🤐
+              </Typography>
+            </Box>
+
+            {/* 30-Day Money-Back Guarantee */}
+            <Box sx={{ display: "flex", alignItems: "center" }}>
+              <Typography
+                component="span"
+                sx={{
+                  marginLeft: {
+                    xs: "0", // No margin on small screens
+                    sm: "5vw", // 5% of viewport width for small screens
+                    md: "10vw", // 10% of viewport width for medium screens
+                    lg: "-22vw", // 15% of viewport width for large screens
+                  },
+                  color: "#333333", // Dark grey color
+                  fontWeight: "bold", // Bold text
+                }}
+              >
+                <span style={{ fontSize: "1.5rem", marginRight: "8px" }}>
+                  •
+                </span>
+                30-Day Money-Back Guarantee 💸
+              </Typography>
+            </Box>
+          </Stack>
+        </Box>
+
+        <Box
+          sx={{
+            padding: 3,
+            maxWidth: 800,
+            margin: "auto",
+            fontFamily: "Arial, sans-serif",
+            backgroundColor: "white", // Outer box background set to white
+          }}
+        >
+          {/* Product Highlights */}
+
+          {/* Customer Reviews Section */}
+          <Typography
+            variant="h5"
+            sx={{
+              marginTop: 4,
+              fontWeight: "bold",
+              backgroundColor: "white",
+              textAlign: { xs: "center", sm: "left" }, // Center on smaller screens and left-align on larger screens
+            }}
+          >
+            Customer Reviews
+          </Typography>
+
+          <Typography
+            variant="h6"
+            sx={{
+              marginTop: 2,
+              backgroundColor: "white",
+              textAlign: { xs: "center", sm: "left" }, // Center on smaller screens and left-align on larger screens
+              fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" }, // Increase font size on different screen sizes
+            }}
+          >
+            4.8
+          </Typography>
+
+          <Typography
+            gutterBottom
+            sx={{
+              color: "rgb(245 158 11 / var(--tw-text-opacity, 1))",
+              fontSize: 18,
+              marginBottom: "20px", // Add spacing between the review section and the price section
+              textAlign: { xs: "center", sm: "left" }, // Centered on small screens, left-aligned on larger screens
+            }}
+          >
+            <Stack
+              direction="column"
+              justifyContent="center"
+              alignItems={{ xs: "center", sm: "flex-start" }} // Center on small screens, left-align on larger screens
+            >
+              <span>★★★★★</span>
+              <span
+                style={{
+                  fontSize: 19,
+                  fontWeight: "semi-bold",
+                  color: "#a0a0a0",
+                }}
+              >
+                15 Reviews
+              </span>
+            </Stack>
+          </Typography>
+
+          <Box sx={{ marginTop: 4, backgroundColor: "white", padding: 2 }}>
+            {reviews.map((review, index) => (
+              <Box
+                key={index}
+                sx={{
+                  marginBottom: 3,
+                  backgroundColor: "white", // White background for each review
+                  padding: 2,
+                  borderRadius: "8px", // Rounded corners
+                }}
+              >
+                <Grid container spacing={2} alignItems="center">
+                  {/* Left Section: Name and Date */}
+                  <Grid
+                    item
+                    xs={12} // Full width on smaller screens
+                    sm={4} // 4/12 of the width on larger screens
+                  >
+                    <Typography
+                      variant="subtitle1"
+                      sx={{
+                        fontWeight: "bold",
+                        color: "#333333",
+                        marginBottom: 1,
+                        textAlign: { xs: "center", sm: "left" }, // Centered on smaller screens, left-aligned on larger screens
+                      }}
+                    >
+                      {review.name} - {review.date}
+                    </Typography>
+                  </Grid>
+
+                  {/* Right Section: Star Rating and Review Text */}
+                  <Grid
+                    item
+                    xs={12} // Full width on smaller screens
+                    sm={8} // 8/12 of the width on larger screens
+                  >
+                    {/* Star Rating */}
+                    <Typography
+                      sx={{
+                        color: "rgb(245 158 11 / var(--tw-text-opacity, 1))",
+                        fontSize: 18,
+                        marginBottom: 1,
+                        textAlign: "center",
+                      }}
+                    >
+                      ★★★★★
+                    </Typography>
+
+                    {/* Review Text */}
+                    <Typography
+                      variant="body2"
+                      sx={{
+                        color: "#666666", // Light gray color for the review text
+                        textAlign: { xs: "center", sm: "left" }, // Centered on smaller screens, left-aligned on larger screens
+                      }}
+                    >
+                      {review.review}
+                    </Typography>
+                  </Grid>
+                </Grid>
+
+                {/* Divider between reviews */}
+                {index < reviews.length - 1 && (
+                  <Divider sx={{ marginY: 2, backgroundColor: "#cccccc" }} />
+                )}
+              </Box>
+            ))}
+          </Box>
+        </Box>
       </div>
-
-      <footer
-        style={{
-          backgroundColor: "white",
-          color: "black",
-          textAlign: "center",
-          padding: "10px 0",
-          borderTop: "1px solid #ddd",
-        }}
-      >
-        <Typography variant="body2">
-          © 2024 CHloakCalc Inc. All Rights Reserved.
-        </Typography>
-      </footer>
-
+      <Footer /> {/* Add Footer component here */}
       <style>
         {`
           /* Set the cursor for navigation buttons to pointer (gray) */

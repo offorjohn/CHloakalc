@@ -48,8 +48,6 @@ export default function App(props) {
   const [isSliding, setIsSliding] = React.useState(false);
   const [count, setCount] = React.useState(1);
 
-
-
   const reviews = [
     {
       name: "Milek M.",
@@ -462,7 +460,7 @@ export default function App(props) {
                                 color: "#a0a0a0",
                               }}
                             >
-                              $186.00 USD
+                              $166.5 USD
                             </span>
                             <span
                               style={{
@@ -750,7 +748,7 @@ export default function App(props) {
             }}
           >
             <span style={{ textDecoration: "line-through", color: "#a0a0a0" }}>
-              $186.00 USD
+              $166.5 USD
             </span>
             <span
               style={{
@@ -1037,11 +1035,16 @@ export default function App(props) {
                 display: "flex",
                 alignItems: "center",
                 cursor: "pointer",
+                width: "30px", // Consistent width
+        height: "30px", // Consistent height
                 backgroundColor: "transparent",
+                // Add responsive margin or padding for mobile adjustment
+                ml: { xs: -1, sm: 0 }, // Add
               }}
             >
               -
             </Box>
+
             <Box
               sx={{
                 display: "flex",
@@ -1050,8 +1053,10 @@ export default function App(props) {
                 fontSize: "18px",
                 fontWeight: "bold",
                 width: "40px", // Ensure consistent width
-                textAlign: "center",
+             
                 marginTop: "1px",
+
+                marginX: "10px", // Add consistent space between buttons
               }}
             >
               {count}

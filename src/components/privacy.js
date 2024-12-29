@@ -12,11 +12,7 @@ const Home = () => {
   const [checkoutLoading, setCheckoutLoading] = useState(false); // Loading state for the button
   const [country, setCountry] = useState("United States");
   const [convertedPrice, setConvertedPrice] = useState(price);
-  const [shippingMethod, setShippingMethod] = useState("");
 
-  const handleShippingMethodChange = (event) => {
-    setShippingMethod(event.target.value);
-  };
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const countryCurrencyMap = {
@@ -323,24 +319,15 @@ const Home = () => {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                  <FormControl fullWidth>
-                    <InputLabel id="shipping-method-label">
-                      Shipping Method
-                    </InputLabel>
-                    <Select
-                      labelId="shipping-method-label"
-                      id="shippingMethod"
-                      value={shippingMethod}
-                      onChange={handleShippingMethodChange}
-                      name="shippingMethod"
-                      autoComplete="shipping-method"
-                    >
-                      <MenuItem value="Standard">Standard</MenuItem>
-                      <MenuItem value="Express">Express</MenuItem>
-                      <MenuItem value="Overnight">Overnight</MenuItem>
-                    </Select>
-                  </FormControl>
-                </Grid>
+  <TextField
+    required
+    fullWidth
+    id="phone"
+    label="Phone number"
+    name="phone"
+    autoComplete="tel"
+  />
+</Grid>
               </Grid>
             </Box>
           </Box>
@@ -457,7 +444,7 @@ const Home = () => {
         
       </Grid>
 
-      <Footer /> {/* Add Footer component here */}
+      <Footer /> {/* Add Footer component here */} 
       
     </Box>
     

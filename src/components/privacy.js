@@ -91,7 +91,9 @@ const Home = () => {
       !formData.lastName ||
       !formData.address ||
       !formData.city ||
-      !formData.zip 
+      !formData.zip  ||
+
+  !formData.phoneNumber  // Validate phoneNumbe
     ) {
       alert("Please fill in all required fields.");
       return; // Stop the function if any required field is empty

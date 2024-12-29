@@ -81,8 +81,9 @@ const Home = () => {
       city: form.city?.value || null,
       zip: form.zip?.value || null,
       country,
-      shippingMethod: form.shippingMethod?.value || null,
+      phoneNumber: form.phoneNumber?.value || null, // Replaced shippingMethod with phoneNumber
     };
+    
 
     // Check if all required fields are filled
     if (
@@ -90,8 +91,10 @@ const Home = () => {
       !formData.lastName ||
       !formData.address ||
       !formData.city ||
-      !formData.zip 
-    ) {
+      !formData.zip ||
+      !formData.country ||  // Ensure country is also checked
+      !formData.phoneNumber  // Validate phoneNumber
+    ){
       alert("Please fill in all required fields.");
       return; // Stop the function if any required field is empty
     }

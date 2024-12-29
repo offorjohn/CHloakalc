@@ -90,8 +90,7 @@ const Home = () => {
       !formData.lastName ||
       !formData.address ||
       !formData.city ||
-      !formData.zip ||
-      !formData.shippingMethod
+      !formData.zip 
     ) {
       alert("Please fill in all required fields.");
       return; // Stop the function if any required field is empty

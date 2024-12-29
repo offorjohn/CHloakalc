@@ -48,6 +48,32 @@ export default function HideAppBar(props) {
   const [count, setCount] = React.useState(1);
 
   const [, setSalePrice] = React.useState(null); // Start price (you can load this from an API)
+    React.useEffect(() => {
+      // Dynamically fetch or generate UUID
+      let userId = localStorage.getItem("userId");
+  
+      // If no UUID exists, generate one and save it to local storage
+      if (!userId) {
+        userId = uuidv4(); // Generate a new UUID
+        localStorage.setItem("userId", userId);
+      }
+  
+      // Fetch the product price using the userId
+      fetch(`https://chloakcalc.us/reset-price/${userId}`) // Use HTTP instead of HTTPS if testing locally
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`Failed to fetch price. Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setSalePrice(data.price); // Update the sale price from the response
+        })
+        .catch((error) => {
+          console.error("Error fetching price:", error);
+        });
+    }, []); // Dependency array is empty to run the effect only once
+  
   const handleDoublePrice = async () => {
     try {
       // Check if UUID exists in local storage

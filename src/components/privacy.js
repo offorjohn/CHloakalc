@@ -12,6 +12,7 @@ const Home = () => {
   const [checkoutLoading, setCheckoutLoading] = useState(false); // Loading state for the button
   const [country, setCountry] = useState("United States");
   const [convertedPrice, setConvertedPrice] = useState(price);
+  
 
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -80,20 +81,19 @@ const Home = () => {
       apartment: form.apartment?.value || null,
       city: form.city?.value || null,
       zip: form.zip?.value || null,
-      country,
-      phoneNumber: form.phoneNumber?.value || null, // Replaced shippingMethod with phoneNumber
+      country: country || null, // Use selected country from state
+      phoneNumber: form.phone?.value || null, // Accessing 'phone' correctly
     };
-    
 
     // Check if all required fields are filled
     if (
       !formData.firstName ||
       !formData.lastName ||
       !formData.address ||
-      !formData.city ||
-      !formData.zip  ||
-
-  !formData.phoneNumber  // Validate phoneNumbe
+    
+      !formData.country ||
+      !formData.phoneNumber ||
+      !formData.city 
     ) {
       alert("Please fill in all required fields.");
       return; // Stop the function if any required field is empty
@@ -160,6 +160,7 @@ const Home = () => {
   const handleCountryChange = (event) => {
     const selectedCountry = event.target.value;
     setCountry(selectedCountry);
+    
 
     const { rate } = countryCurrencyMap[selectedCountry];
     const newConvertedPrice = price * rate;
@@ -222,7 +223,6 @@ const Home = () => {
       <Typography sx={{ fontSize: "1rem", fontWeight: "bold" }}>
         chloakcalc
       </Typography>
-
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Box
@@ -238,10 +238,10 @@ const Home = () => {
               paddingBottom: "10px",
             }}
           >
+            
             <Typography sx={{ fontSize: "1.4rem", marginTop: "10px" }}>
               Delivery
             </Typography>
-
             <Box component="form" noValidate sx={{ mt: 3 }}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -250,7 +250,7 @@ const Home = () => {
                     name="firstName"
                     fullWidth
                     id="firstName"
-                    label="First name (optional)"
+                    label="First name (Required)"
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -258,7 +258,7 @@ const Home = () => {
                     required
                     fullWidth
                     id="lastName"
-                    label="Last name"
+                    label="Last name  (Required)"
                     name="lastName"
                     autoComplete="family-name"
                   />
@@ -268,7 +268,7 @@ const Home = () => {
                     required
                     fullWidth
                     id="address"
-                    label="Address"
+                    label="Address (Required)"
                     name="address"
                     autoComplete="address-line1"
                   />
@@ -287,7 +287,7 @@ const Home = () => {
                     required
                     fullWidth
                     id="city"
-                    label="City"
+                    label="City (Required)"
                     name="city"
                     autoComplete="address-level2"
                   />
@@ -297,18 +297,18 @@ const Home = () => {
                     required
                     fullWidth
                     id="zip"
-                    label="ZIP code"
+                    label="ZIP code (optional)"
                     name="zip"
                     autoComplete="postal-code"
                   />
                 </Grid>
                 <Grid item xs={12}>
                   <FormControl fullWidth>
-                    <InputLabel id="country-label">Country</InputLabel>
+                    <InputLabel id="country">Country</InputLabel>
                     <Select
                       id="country"
                       label="Country"
-                      labelId="country-label"
+                      labelId="country-label (Required)"
                       value={country}
                       onChange={handleCountryChange}
                     >
@@ -321,15 +321,15 @@ const Home = () => {
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-  <TextField
-    required
-    fullWidth
-    id="phone"
-    label="Phone number"
-    name="phone"
-    autoComplete="tel"
-  />
-</Grid>
+                  <TextField
+                    required
+                    fullWidth
+                    id="phone"
+                    label="Phone number (Required)"
+                    name="phone"
+                    autoComplete="tel"
+                  />
+                </Grid>
               </Grid>
             </Box>
           </Box>
@@ -442,15 +442,9 @@ const Home = () => {
         >
           {checkoutLoading ? "Processing..." : "Proceed to Checkout"}
         </Button>
-
-        
       </Grid>
-
-      <Footer /> {/* Add Footer component here */} 
-      
+      <Footer /> {/* Add Footer component here */}
     </Box>
-    
-    
   );
 };
 

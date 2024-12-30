@@ -331,17 +331,22 @@ export default function App(props) {
                 alignItems: "center", // Center items vertically
               }}
             >
-              <img
-                src="/assets/background/wwe.png" // Replace with the actual path to your image
-                alt="Logo"
-                style={{
-                  width: "250px", // Increased width to stretch more
-                  height: "100px", // Increased height to stretch more
-                  objectFit: "cover", // Stretches the image to cover the area without maintaining aspect ratio
-                  borderRadius: "15px",
-                  marginTop: "10px", // Move the image down by 20p
-                }}
-              />
+              <Link to="/" style={{ textDecoration: "none" }}>
+                {" "}
+                {/* Navigate to homepage */}
+                <img
+                  src="/assets/background/wwe.png" // Replace with the actual path to your image
+                  alt="Logo"
+                  style={{
+                    width: "250px", // Increased width to stretch more
+                    height: "100px", // Increased height to stretch more
+                    objectFit: "cover", // Stretches the image to cover the area without maintaining aspect ratio
+                    borderRadius: "15px",
+                    marginTop: "10px", // Move the image down by 10px
+                    cursor: "pointer", // Indicate the element is clickable
+                  }}
+                />
+              </Link>
             </Toolbar>
           </AppBar>
         </HideOnScroll>
@@ -1036,7 +1041,7 @@ export default function App(props) {
                 alignItems: "center",
                 cursor: "pointer",
                 width: "30px", // Consistent width
-        height: "30px", // Consistent height
+                height: "30px", // Consistent height
                 backgroundColor: "transparent",
                 // Add responsive margin or padding for mobile adjustment
                 ml: { xs: -1, sm: 0 }, // Add
@@ -1053,7 +1058,7 @@ export default function App(props) {
                 fontSize: "18px",
                 fontWeight: "bold",
                 width: "40px", // Ensure consistent width
-             
+
                 marginTop: "1px",
 
                 marginX: "10px", // Add consistent space between buttons

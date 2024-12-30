@@ -442,7 +442,7 @@ export default function HideAppBar(props) {
                   fontSize: { xs: "0.001em", sm: "1em" }, // Smaller font size on extra-small screens
                   backgroundColor: "#654321", // Dark brown background
 
-                  marginLeft: { xs: "-90px", sm: "0" }, // Apply -90px marginLeft on extra
+                  marginLeft: { xs: "10px", sm: "0" }, // Apply -90px marginLeft on extra
                   marginTop: "20px", // Top margin
                 }}
               >

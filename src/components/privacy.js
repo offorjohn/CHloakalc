@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Box, Grid, Typography, Button } from "@mui/material";
+
+import Toolbar from "@mui/material/Toolbar";
 import { v4 as uuidv4 } from "uuid"; // Import the UUID function
 import TextField from "@mui/material/TextField";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { Link } from "react-router-dom";
 
 import Footer from "./footer";
 
@@ -220,9 +223,30 @@ const Home = () => {
         borderRadius: "8px", // Optional rounded corners
       }}
     >
-      <Typography sx={{ fontSize: "1rem", fontWeight: "bold" }}>
-        chloakcalc
-      </Typography>
+        <Toolbar
+              style={{
+                display: "flex", // Enable flexbox
+                justifyContent: "center", // Center items horizontally
+                alignItems: "center", // Center items vertically
+              }}
+            >
+              <Link to="/" style={{ textDecoration: "none" }}>
+                {" "}
+                {/* Navigate to homepage */}
+                <img
+                  src="/assets/background/wwe.png" // Replace with the actual path to your image
+                  alt="Logo"
+                  style={{
+                    width: "250px", // Increased width to stretch more
+                    height: "100px", // Increased height to stretch more
+                    objectFit: "cover", // Stretches the image to cover the area without maintaining aspect ratio
+                    borderRadius: "15px",
+                    marginTop: "10px", // Move the image down by 10px
+                    cursor: "pointer", // Indicate the element is clickable
+                  }}
+                />
+              </Link>
+            </Toolbar>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Box

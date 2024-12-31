@@ -944,26 +944,7 @@ export default function HideAppBar(props) {
           </Link>
         </Box>
       </Stack>
-      <Toolbar
-  style={{
-    display: "flex", // Enable flexbox
-    justifyContent: "center", // Center items horizontally
-    alignItems: "center", // Center items vertically
-    backgroundColor: "white", // Set white background color
-  }}
->
-  <img
-    src="/assets/background/wwe.png" // Replace with the actual path to your image
-    alt="Logo"
-    style={{
-      width: "400px", // Increased width for a larger image
-      height: "150px", // Adjusted height proportionally
-      objectFit: "cover", // Stretches the image to cover the area without maintaining aspect ratio
-      borderRadius: "15px",
-      marginTop: "60px", // Moved the image down by 60px
-    }}
-  />
-</Toolbar>
+   
 
 {/* Add marginTop to move the footer further down */}<Box sx={{ marginTop: "20px" }}>
   <Footer />

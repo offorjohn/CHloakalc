@@ -79,26 +79,7 @@ const ShippingPolicy = () => {
         </Container>
 
         {/* Footer component */}
-        <Toolbar
-          style={{
-            display: "flex", // Enable flexbox
-            justifyContent: "center", // Center items horizontally
-            alignItems: "center", // Center items vertically
-            marginTop: "auto", // Push the footer to the bottom of the screen
-          }}
-        >
-          <img
-            src="/assets/background/wwe.png" // Replace with the actual path to your image
-            alt="Logo"
-            style={{
-              width: "400px", // Increased width for a larger image
-              height: "150px", // Adjusted height proportionally
-              objectFit: "cover", // Stretches the image to cover the area without maintaining aspect ratio
-              borderRadius: "15px",
-              marginTop: "10px", // Move the image down by 10px
-            }}
-          />
-        </Toolbar>
+    
         <Footer /> {/* Add Footer component here */}
       </Box>
     </>

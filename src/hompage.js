@@ -16,6 +16,7 @@ import Slide from "@mui/material/Slide";
 import Grid from "@mui/material/Grid";
 import Footer from "./components/footer";
 import { Stack } from "@mui/material";
+import WhatsAppIcon from "./telegram";
 
 import { v4 as uuidv4 } from "uuid"; // Import the uuid library
 
@@ -924,7 +925,7 @@ export default function HideAppBar(props) {
           </Link>
         </Box>
       </Stack>
-   
+   <WhatsAppIcon/>
 
 {/* Add marginTop to move the footer further down */}<Box sx={{ marginTop: "20px" }}>
   <Footer />

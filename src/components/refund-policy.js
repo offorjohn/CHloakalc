@@ -2,6 +2,7 @@ import React from "react";
 import { Box, Typography, Container, List, ListItem, ListItemText } from "@mui/material";
 import Footer from "./footer";
 import { Link } from "react-router-dom";
+import WhatsAppIcon from "../telegram";
 import Toolbar from "@mui/material/Toolbar";
 
 const RefundPolicy = () => {
@@ -228,6 +229,7 @@ const RefundPolicy = () => {
       </Container>
   
       
+         <WhatsAppIcon/>
       <Footer /> {/* Add Footer component here */}
     </Box>
   );

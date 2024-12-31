@@ -6,7 +6,7 @@ import { v4 as uuidv4 } from "uuid"; // Import the UUID function
 import TextField from "@mui/material/TextField";
 import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { Link } from "react-router-dom";
-
+import WhatsAppIcon from "../telegram";
 import Footer from "./footer";
 
 const Home = () => {
@@ -460,7 +460,10 @@ const Home = () => {
       </Grid>
     
 
-    </Box><Footer /></>
+    </Box>
+    
+       <WhatsAppIcon/>
+    <Footer /></>
   );
 };
 

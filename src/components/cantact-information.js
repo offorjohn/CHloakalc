@@ -3,6 +3,7 @@ import { Box, Typography, Container,  } from "@mui/material";
 import { Email } from "@mui/icons-material";
 import Footer from "./footer";
 import { Link } from "react-router-dom";
+import WhatsAppIcon from "../telegram";
 
 import Toolbar from "@mui/material/Toolbar";
 
@@ -71,6 +72,7 @@ const ContactInformation = () => {
         </Box>
       </Container>
  
+    <WhatsAppIcon/>
       {/* Footer section */}
       <Footer /> {/* Footer will always be at the bottom */}
     </Box>

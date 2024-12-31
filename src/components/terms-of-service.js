@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Typography, Container } from "@mui/material";
 import Footer from "./footer";
-
+import WhatsAppIcon from "../telegram";
 import Toolbar from "@mui/material/Toolbar";
 import { Link } from "react-router-dom";
 
@@ -127,6 +127,7 @@ const TermsOfService = () => {
       </Container>
    
       
+         <WhatsAppIcon/>
       <Footer /> {/* Add Footer component here */}
     </Box>
   );

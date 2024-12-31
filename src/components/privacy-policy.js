@@ -3,6 +3,7 @@ import { Box, Typography, Container, List, ListItem, ListItemText,  } from "@mui
 import { Link } from "react-router-dom";
 import Footer from "./footer";
 import Toolbar from "@mui/material/Toolbar";
+import WhatsAppIcon from "../telegram";
 
 const PrivacyPolicy = () => {
   return (
@@ -207,6 +208,7 @@ const PrivacyPolicy = () => {
         </Box>
       </Container>
    
+      <WhatsAppIcon/>
 
       <Footer /> {/* Add Footer component here */}
     </Box>

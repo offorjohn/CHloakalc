@@ -3,6 +3,7 @@ import { Box, Typography, Container, } from "@mui/material";
 import { Link } from "react-router-dom";
 import Footer from "./footer";
 import Toolbar from "@mui/material/Toolbar";
+import WhatsAppIcon from "../telegram";
 
 const ShippingPolicy = () => {
   return (
@@ -80,6 +81,7 @@ const ShippingPolicy = () => {
 
         {/* Footer component */}
     
+       <WhatsAppIcon/>
         <Footer /> {/* Add Footer component here */}
       </Box>
     </>

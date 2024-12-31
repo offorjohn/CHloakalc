@@ -480,6 +480,7 @@ export default function HideAppBar(props) {
           sx={{
             display: { xs: "block", sm: "none" }, // Make it visible only on small screens
             alignItems: "center", // Center the buttons hor
+            ml: { xs: 2, md: 0 }, // Move left on small screens
             //
             marginLeft: "25px", // Moves the buttons to the right slightly on mobileizontally on mobile
           }}
@@ -487,17 +488,18 @@ export default function HideAppBar(props) {
           <Box
             sx={{
               width: { xs: "100%", md: "120%" },
-              mt: { xs: 5, md: -9 }, // Move down on small screens, up on large screens
+              mt: { xs: -3, md: -9 }, // Move down on small screens, up on large screens
               position: "relative",
               backgroundColor: "#ffffff",
               order: { xs: 1, md: 2 }, // Image above text on small screens, right on large
+           
             }}
           >
             <img
               src="/assets/background/calc.png"
               alt="Work in progress"
               style={{
-                width: "100%",
+                width: "95%",
                 height: "auto",
                 objectFit: "cover",
                 borderRadius: "15px",

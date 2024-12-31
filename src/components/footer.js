@@ -1,11 +1,8 @@
 import React from "react";
 import { Box, Grid, Typography, Link } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
 
 const Footer = () => {
-  const handleLinkClick = (event) => {
-    event.preventDefault(); // Prevent the default link navigation behavior
-  };
-
   return (
     <Box
       sx={{
@@ -21,26 +18,32 @@ const Footer = () => {
           </Typography>
         </Grid>
         <Grid item>
-          <Link onClick={handleLinkClick} variant="body2" color="textSecondary" style={{ cursor: "pointer" }}>
+          <Link component={RouterLink} to="/shoping-policy" variant="body2" color="textSecondary">
             Shopping Policy
           </Link>
         </Grid>
         <Grid item>
-          <Link onClick={handleLinkClick} variant="body2" color="textSecondary" style={{ cursor: "pointer" }}>
+          <Link component={RouterLink} to="/refund-policy" variant="body2" color="textSecondary">
+            Refund Policy
+          </Link>
+        </Grid>
+        <Grid item>
+          <Link component={RouterLink} to="/privacy-policy" variant="body2" color="textSecondary">
             Privacy Policy
           </Link>
         </Grid>
         <Grid item>
-          <Link onClick={handleLinkClick} variant="body2" color="textSecondary" style={{ cursor: "pointer" }}>
-            Terms of service
+          <Link component={RouterLink} to="/terms-of-service" variant="body2" color="textSecondary">
+            Terms of Service
           </Link>
         </Grid>
         <Grid item>
-          <Link onClick={handleLinkClick} variant="body2" color="textSecondary" style={{ cursor: "pointer" }}>
-            Contact information
+          <Link component={RouterLink} to="/contact-information" variant="body2" color="textSecondary">
+            Contact Information
           </Link>
         </Grid>
       </Grid>
+      
     </Box>
   );
 };

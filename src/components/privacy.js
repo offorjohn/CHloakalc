@@ -214,7 +214,7 @@ const Home = () => {
   }, [price, country, countryCurrencyMap]);
 
   return (
-    <Box
+    <><Box
       sx={{
         minHeight: "100vh",
         padding: "20px",
@@ -223,30 +223,29 @@ const Home = () => {
         borderRadius: "8px", // Optional rounded corners
       }}
     >
-        <Toolbar
-              style={{
-                display: "flex", // Enable flexbox
-                justifyContent: "center", // Center items horizontally
-                alignItems: "center", // Center items vertically
-              }}
-            >
-              <Link to="/" style={{ textDecoration: "none" }}>
-                {" "}
-                {/* Navigate to homepage */}
-                <img
-                  src="/assets/background/wwe.png" // Replace with the actual path to your image
-                  alt="Logo"
-                  style={{
-                    width: "250px", // Increased width to stretch more
-                    height: "100px", // Increased height to stretch more
-                    objectFit: "cover", // Stretches the image to cover the area without maintaining aspect ratio
-                    borderRadius: "15px",
-                    marginTop: "10px", // Move the image down by 10px
-                    cursor: "pointer", // Indicate the element is clickable
-                  }}
-                />
-              </Link>
-            </Toolbar>
+      <Toolbar
+        style={{
+          display: "flex", // Enable flexbox
+          justifyContent: "center", // Center items horizontally
+          alignItems: "center", // Center items vertically
+        }}
+      >
+        <Link to="/" style={{ textDecoration: "none" }}>
+          {" "}
+          {/* Navigate to homepage */}
+          <img
+            src="/assets/background/wwe.png" // Replace with the actual path to your image
+            alt="Logo"
+            style={{
+              width: "250px", // Increased width to stretch more
+              height: "100px", // Increased height to stretch more
+              objectFit: "cover", // Stretches the image to cover the area without maintaining aspect ratio
+              borderRadius: "15px",
+              marginTop: "10px", // Move the image down by 10px
+              cursor: "pointer", // Indicate the element is clickable
+            }} />
+        </Link>
+      </Toolbar>
       <Grid container spacing={2}>
         <Grid item xs={12} md={6}>
           <Box
@@ -262,7 +261,7 @@ const Home = () => {
               paddingBottom: "10px",
             }}
           >
-            
+
             <Typography sx={{ fontSize: "1.4rem", marginTop: "10px" }}>
               Delivery
             </Typography>
@@ -274,8 +273,7 @@ const Home = () => {
                     name="firstName"
                     fullWidth
                     id="firstName"
-                    label="First name (Required)"
-                  />
+                    label="First name (Required)" />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -284,8 +282,7 @@ const Home = () => {
                     id="lastName"
                     label="Last name  (Required)"
                     name="lastName"
-                    autoComplete="family-name"
-                  />
+                    autoComplete="family-name" />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -294,8 +291,7 @@ const Home = () => {
                     id="address"
                     label="Address (Required)"
                     name="address"
-                    autoComplete="address-line1"
-                  />
+                    autoComplete="address-line1" />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -303,8 +299,7 @@ const Home = () => {
                     id="apartment"
                     label="Apartment, suite, etc. (optional)"
                     name="apartment"
-                    autoComplete="address-line2"
-                  />
+                    autoComplete="address-line2" />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -313,8 +308,7 @@ const Home = () => {
                     id="city"
                     label="City (Required)"
                     name="city"
-                    autoComplete="address-level2"
-                  />
+                    autoComplete="address-level2" />
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -323,8 +317,7 @@ const Home = () => {
                     id="zip"
                     label="ZIP code (optional)"
                     name="zip"
-                    autoComplete="postal-code"
-                  />
+                    autoComplete="postal-code" />
                 </Grid>
                 <Grid item xs={12}>
                   <FormControl fullWidth>
@@ -351,8 +344,7 @@ const Home = () => {
                     id="phone"
                     label="Phone number (Required)"
                     name="phone"
-                    autoComplete="tel"
-                  />
+                    autoComplete="tel" />
                 </Grid>
               </Grid>
             </Box>
@@ -390,8 +382,7 @@ const Home = () => {
                       borderColor: "green", // Border color when focused
                     },
                   },
-                }}
-              />
+                }} />
             </Grid>
             <Grid item xs={12}>
               <Grid container spacing={2}>
@@ -467,8 +458,26 @@ const Home = () => {
           {checkoutLoading ? "Processing..." : "Proceed to Checkout"}
         </Button>
       </Grid>
-      <Footer /> {/* Add Footer component here */}
-    </Box>
+      <Toolbar
+        style={{
+          display: "flex", // Enable flexbox
+          justifyContent: "center", // Center items horizontally
+          alignItems: "center", // Center items vertically
+        }}
+      >
+        <img
+          src="/assets/background/wwe.png" // Replace with the actual path to your image
+          alt="Logo"
+          style={{
+            width: "400px", // Increased width for a larger image
+            height: "150px", // Adjusted height proportionally
+            objectFit: "cover", // Stretches the image to cover the area without maintaining aspect ratio
+            borderRadius: "15px",
+            marginTop: "10px", // Move the image down by 20px
+          }} />
+      </Toolbar>
+
+    </Box><Footer /></>
   );
 };
 

@@ -442,8 +442,8 @@ export default function HideAppBar(props) {
                   fontSize: { xs: "0.001em", sm: "1em" }, // Smaller font size on extra-small screens
                   backgroundColor: "#654321", // Dark brown background
 
-                  marginLeft: { xs: "10px", sm: "0" }, // Apply -90px marginLeft on extra
-                  marginTop: "20px", // Top margin
+                  marginLeft: { xs: "10px", lg: "550px" }, // Apply -90px marginLeft on extra
+                  marginTop: { xs: "20px",  lg: "-211px" }, // Move up progressively on larger screens
                 }}
               >
                 <Typography component="span">Shop Now !</Typography>
@@ -459,6 +459,7 @@ export default function HideAppBar(props) {
               position: "relative",
               backgroundColor: "#ffffff",
               order: { xs: 1, md: 2 }, // Image above text on small screens, right on large
+              display: { xs: "block", md: "none" }, // Visible on small screens, hidden on large screens
             }}
           >
             <img

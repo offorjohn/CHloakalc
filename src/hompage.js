@@ -393,87 +393,64 @@ export default function HideAppBar(props) {
         justifyContent="center"
         sx={{ backgroundColor: "#ffffff", minHeight: "100vh" }}
       >
-        <Grid
-          item
-          xs={12}
-          md={6}
-          sx={{
-            display: "flex",
+      <Grid
+  container
+  sx={{
+    height: "100vh", // Full viewport height
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center", // Center content vertically and horizontally
+    textAlign: "center", // Center text alignment
+  }}
+>
+  {/* Text Block */}
+  <Box
+    sx={{
+      width: { xs: "90%", md: "60%" }, // Adjust width for responsiveness
+      textAlign: "center", // Center text alignment
+    }}
+  >
+    <Typography
+      variant="h4"
+      sx={{
+        fontWeight: 700,
+        mb: 2,
+        fontSize: { xs: "2rem", md: "3rem" }, // Larger font size for heading
+        whiteSpace: "normal", // Allow text to wrap if necessary
+      }}
+    >
+      Ace Every Test with Ease!
+    </Typography>
 
-            gap: { md: 4 }, // Add space between text and image on larger screens
-            flexDirection: { xs: "column", md: "row" }, // Stack on small screens, row on large
-            alignItems: "center",
+    <Typography
+      variant="body1"
+      sx={{
+        color: "text.secondary",
+        mb: 3,
+        fontSize: { xs: "1.2rem", md: "1.5rem" }, // Larger font size for body text
+        lineHeight: 1.6, // Increase line height for readability
+      }}
+    >
+      A sneaky calculator with USB file transfer, privacy screen, music
+      playback, and 4GB memory-ideal for work and play!
+    </Typography>
 
-            mt: { xs: 9, md: -13 }, // Move down on small screens, up on large screens
-          }}
-        >
-          {/* Text Block */}
-          <Box
-            sx={{
-              width: { xs: "100%", md: "50%" },
-              textAlign: { xs: "center", md: "left" },
-              padding: { xs: 2, md: 1 },
-              mt: { xs: 9, md: -20 }, // Move down on small screens, up on large screens
-              order: { xs: 2, md: 1 }, // Text below image on small screens, left on large
-            }}
-          >
-            <Typography
-              variant="h4"
-              sx={{
-                fontWeight: 700,
-                mb: 2,
-                whiteSpace: { xs: "normal", lg: "nowrap" }, // Normal wrapping on small screens, no wrapping on large screens
-              }}
-            >
-              Ace Every Test with ease!
-            </Typography>
+    <Link to="/checkout">
+      <Button
+        variant="contained"
+        sx={{
+          width: { xs: "80%", sm: "40%" }, // Button width responsive to screen size
+          padding: { xs: "10px", sm: "12px" }, // Button padding
+          fontSize: { xs: "1rem", sm: "1.2rem" }, // Slightly larger button font size
+          backgroundColor: "#654321", // Dark brown background
+        }}
+      >
+        <Typography component="span">Shop Now!</Typography>
+      </Button>
+    </Link>
+  </Box>
+</Grid>
 
-            <Typography variant="body1" sx={{ color: "text.secondary" }}>
-              A sneaky calculator with USB file transfer, privacy screen, music
-              playback, and 4GB memory-ideal for work and play!
-            </Typography>
-
-            <Link to="/checkout">
-              <Button
-                variant="contained"
-                sx={{
-                  width: { xs: "50%", sm: "55%" }, // Smaller width on extra-small screens, wider on small+
-                  padding: { xs: "10px", sm: "12px" }, // Smaller padding on extra-small screens
-                  fontSize: { xs: "0.001em", sm: "1em" }, // Smaller font size on extra-small screens
-                  backgroundColor: "#654321", // Dark brown background
-
-                  marginLeft: { xs: "10px", lg: "550px" }, // Apply -90px marginLeft on extra
-                  marginTop: { xs: "20px",  lg: "-211px" }, // Move up progressively on larger screens
-                }}
-              >
-                <Typography component="span">Shop Now !</Typography>
-              </Button>
-            </Link>
-          </Box>
-
-          {/* Image Block */}
-          <Box
-            sx={{
-              width: { xs: "100%", md: "120%" },
-              mt: { xs: 5, md: -9 }, // Move down on small screens, up on large screens
-              position: "relative",
-              backgroundColor: "#ffffff",
-              order: { xs: 1, md: 2 }, // Image above text on small screens, right on large
-              display: { xs: "block", md: "none" }, // Visible on small screens, hidden on large screens
-            }}
-          >
-            <img
-              src="/assets/background/calc1.png"
-              alt="Work in progress"
-              style={{
-                width: "100%",
-                height: "auto",
-                objectFit: "cover",
-                borderRadius: "15px",
-              }}
-            />
-          </Box>
-        </Grid>
 
         <Stack
           direction="column" // Stack the buttons vertically

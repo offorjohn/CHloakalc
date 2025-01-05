@@ -648,19 +648,7 @@ export default function HideAppBar(props) {
             </Box>
           </Button>
 
-          <Button
-            sx={{
-              width: "95%", // Makes the button wider on mobile
-
-              padding: "12px", // Optional: Adds padding to make the button taller
-              borderColor: "#000000", // Black border color
-              color: "#707070", // Text color (black)
-              borderWidth: "1px", // Adjusts the border width (optional)
-              borderStyle: "solid", // Makes sure the border is visible
-            }}
-          >
-            Add to Cart
-          </Button>
+         
 
           <Link to="/privacy">
             <Button
@@ -880,19 +868,7 @@ export default function HideAppBar(props) {
             </Box>
           </Button>
 
-          <Button
-            sx={{
-              width: { xs: "100%", md: "80%" }, // Adjust width for responsiveness
-              padding: "12px",
-              borderColor: "#000000",
-              color: "#707070",
-              borderWidth: "1px",
-              borderStyle: "solid",
-              marginTop: "10px",
-            }}
-          >
-            Add to Cart
-          </Button>
+         
 
           <Link to="/privacy">
             <Button

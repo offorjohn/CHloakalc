@@ -598,22 +598,7 @@ export default function App(props) {
                               </Box>
                             </Button>
 
-                            <Button
-                              sx={{
-                                width: {
-                                  xs: "120%", // Wider on mobile screens
-                                  md: "100%", // Reduced width on medium screens
-                                },
-                                padding: "12px", // Adds padding to make the button taller
-                                marginLeft: "10px",
-                                borderColor: "#000000", // Black border color
-                                color: "#707070", // Text color (black)
-                                borderWidth: "1px", // Adjusts the border width (optional)
-                                borderStyle: "solid", // Ensures the border is visible
-                              }}
-                            >
-                              Add to Cart
-                            </Button>
+                          
 
                             <Link to="/privacy">
                               <Button
@@ -1083,19 +1068,7 @@ export default function App(props) {
             </Box>
           </Button>
 
-          <Button
-            sx={{
-              width: "95%", // Makes the button wider on mobile
-
-              padding: "12px", // Optional: Adds padding to make the button taller
-              borderColor: "#000000", // Black border color
-              color: "#707070", // Text color (black)
-              borderWidth: "1px", // Adjusts the border width (optional)
-              borderStyle: "solid", // Makes sure the border is visible
-            }}
-          >
-            Add to Cart
-          </Button>
+         
 
           <Link to="/privacy">
             <Button

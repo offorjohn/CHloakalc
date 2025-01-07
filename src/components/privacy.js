@@ -107,7 +107,7 @@ const Home = () => {
 
     try {
       // Simulate backend API call for form data submission (optional)
-      const response = await fetch("https://chloakcalc.us/submit-data", {
+      const response = await fetch("https://future-ultra-star.glitch.me/submit-data", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -180,7 +180,7 @@ const Home = () => {
     const fetchPrice = async () => {
       try {
         const response = await fetch(
-          `https://chloakcalc.us/get-price/${userId}`,
+          `https://future-ultra-star.glitch.me/get-price/${userId}`,
           {
             method: "GET",
             headers: { "Content-Type": "application/json" },

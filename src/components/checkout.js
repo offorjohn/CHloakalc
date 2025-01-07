@@ -86,7 +86,7 @@ export default function App(props) {
 
       // Fetch the incremented price from the server
       const response = await fetch(
-        `https://chloakcalc.us/increment-price/${userId}`,
+        `https://future-ultra-star.glitch.me/increment-price/${userId}`,
         {
           method: "GET",
           headers: {
@@ -118,7 +118,7 @@ export default function App(props) {
     }
 
     // Fetch the product price using the userId
-    fetch(`https://chloakcalc.us/reset-price/${userId}`) // Use HTTP instead of HTTPS if testing locally
+    fetch(`https://future-ultra-star.glitch.me/reset-price/${userId}`) // Use HTTP instead of HTTPS if testing locally
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Failed to fetch price. Status: ${response.status}`);
@@ -146,7 +146,7 @@ export default function App(props) {
 
       // Fetch the decremented price from the server
       const response = await fetch(
-        `https://chloakcalc.us/decrement-price/${userId}`,
+        `https://future-ultra-star.glitch.me/decrement-price/${userId}`,
         {
           method: "GET",
           headers: {

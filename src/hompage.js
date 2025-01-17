@@ -521,7 +521,7 @@ export default function HideAppBar(props) {
                 color: "#a0a0a0",
               }}
             >
-              $166.5 USD
+              $100 USD
             </span>
             <span
               style={{
@@ -530,7 +530,7 @@ export default function HideAppBar(props) {
                 borderRadius: "3px", // Rounded corners for the background
               }}
             >
-              ${100} USD
+              ${50} USD
             </span>
 
             <Typography
@@ -763,7 +763,7 @@ export default function HideAppBar(props) {
                 color: "#a0a0a0",
               }}
             >
-              $166.5 USD
+              $100. USD
             </span>
             <span
               style={{
@@ -772,7 +772,7 @@ export default function HideAppBar(props) {
                 borderRadius: "3px",
               }}
             >
-              ${100} USD
+              ${50} USD
             </span>
             <Typography
               sx={{

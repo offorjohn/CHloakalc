@@ -465,7 +465,7 @@ export default function App(props) {
                                 color: "#a0a0a0",
                               }}
                             >
-                              $166.5 USD
+                              $100 USD
                             </span>
                             <span
                               style={{
@@ -474,7 +474,7 @@ export default function App(props) {
                                 borderRadius: "3px", // Rounded corners for the background
                               }}
                             >
-                              ${100} USD
+                              ${50} USD
                             </span>
 
                             <Typography
@@ -738,7 +738,7 @@ export default function App(props) {
             }}
           >
             <span style={{ textDecoration: "line-through", color: "#a0a0a0" }}>
-              $166.5 USD
+              $100 USD
             </span>
             <span
               style={{
@@ -747,7 +747,7 @@ export default function App(props) {
                 borderRadius: "3px", // Rounded corners for the background
               }}
             >
-              ${100} USD
+              ${50} USD
             </span>
 
             <Typography
